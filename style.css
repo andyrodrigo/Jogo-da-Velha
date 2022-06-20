@@ -35,10 +35,13 @@ main{
 
 .espaco{
     background-color:aqua;
+    background-image: none;
+    background-size: cover;
     width: 100px;
     height: 100px;
     border-radius: 10px;
     font-size: 50px;
+    color: transparent;
 }
 
 .espaco:hover{

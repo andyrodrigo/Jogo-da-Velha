@@ -17,6 +17,7 @@ espaco[2][2] = document.getElementById('2x2');
 
 //de jogo
 let jogo = false
+let jogador = 1
 
 
 
@@ -24,11 +25,23 @@ let jogo = false
 //Funções-------------------------------------------------------------------------------
 
 function inserirXO(e){
+    
     let linha = Number(e.currentTarget.parentNode.rowIndex)
     let coluna = Number(e.currentTarget.cellIndex)
-    espaco[linha][coluna].innerText = 'O'
-    testarVitoria('O')
-    //alert(linha + ' ' + coluna)
+    let simbolo
+    
+    if(jogador == 1){
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/X.png")';
+        simbolo = 'X'
+        jogador = 2;
+    }else{
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/O.png")';
+        simbolo = 'O' 
+        jogador = 1;
+    }
+    espaco[linha][coluna].innerText = simbolo
+    testarVitoria(simbolo)
+
 }
 
 function testarVitoria(simbolo){
