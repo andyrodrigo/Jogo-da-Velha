@@ -33,22 +33,36 @@ function inserirXO(e){
 
 function testarVitoria(simbolo){
     
-    let contador = 0 //conta simbolos
+    let contadorL = 0 //conta linha 
+    let contadorC = 0 //conta colunas
+    let contadorDD = 0 //conta diagonal descendo
+    let contadorDS = 0 //conta diagonal subindo
 
-    for(let i=0 ; i<3; i++){//testa linha
+    for(let i=0 ; i<3; i++){
         for(let j=0 ; j<3; j++){
-            if(espaco[i][j].innerText == simbolo){
-                contador++
-            }else{
-                contador=0;
-                break;
+            if(espaco[i][j].innerText == simbolo){//testa linha
+                contadorL++
+            }
+            if(espaco[j][i].innerText == simbolo){//testa coluna
+                contadorC++
+            }
+            if( i == j){
+                if(espaco[i][j].innerText == simbolo){//testa diagonal descendo
+                    contadorDD++
+                }
+            }
+            if( i+j == 2){
+                if(espaco[i][j].innerText == simbolo){//testa diagonal subindo
+                    contadorDS++
+                }
             }
         }
-        if(contador >= 3){
+        if(contadorL >= 3 || contadorC >= 3 || contadorDD >= 3 || contadorDS >= 3){
             indicarVitoria();
             return;
         }else{
-            contador=0; //zera e testa próxima linha
+            contadorL=0;
+            contadorC=0;
         }
     }
 }
