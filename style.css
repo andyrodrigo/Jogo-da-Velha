@@ -6,19 +6,28 @@
     text-decoration: none;
 }
 
-body{
-    background-color: blue;
+main{
+    background-color: brown;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
 
+#inicio{
+    display: none;
 }
 
 #tabuleiro{
     background-color: grey;
     display: flex;
-    justify-content: center;
-    align-content: center;
+    flex-direction:row;
+    align-items: center;
+
 }
 
-#grid{
+#tabela{
     background-color: black;
     width:fit-content;
     height: fit-content;

@@ -11,25 +11,39 @@
 </head>
 
 <body>
-    <div id="tabuleiro">
-        <table id="grid">
-            <tr class="linha">
-                <th id="0x0" class="espaco"> </th>
-                <th id="0x1" class="espaco"> </th>
-                <th id="0x2" class="espaco"> </th>
-            </tr>
-            <tr class="linha">
-                <th id="1x0" class="espaco"> </th>
-                <th id="1x1" class="espaco"> </th>
-                <th id="1x2" class="espaco"> </th>
-            </tr>
-            <tr class="linha">
-                <th id="2x0" class="espaco"> </th>
-                <th id="2x1" class="espaco"> </th>
-                <th id="2x2" class="espaco"> </th>
-            </tr>
-        </table>
+    <div id="inicio">
+        <p>simbolos</p>
+        <div id="selecionaXO">
+            <p>ESCOLHA O SEU SÍMBOLO</p>
+            <div>XO</div>
+            <p>Lembra-se, o X começa</p>
+        </div>
+        <p>Novo Jogo (VS PC)</p>
+        <p>Novo Jogo (Jogador VS Jogador)</p>
     </div>
+
+    <main>
+        <div id="tabuleiro">
+            <table id="tabela">
+                <tr class="linha">
+                    <th id="0x0" class="espaco"> </th>
+                    <th id="0x1" class="espaco"> </th>
+                    <th id="0x2" class="espaco"> </th>
+                </tr>
+                <tr class="linha">
+                    <th id="1x0" class="espaco"> </th>
+                    <th id="1x1" class="espaco"> </th>
+                    <th id="1x2" class="espaco"> </th>
+                </tr>
+                <tr class="linha">
+                    <th id="2x0" class="espaco"> </th>
+                    <th id="2x1" class="espaco"> </th>
+                    <th id="2x2" class="espaco"> </th>
+                </tr>
+            </table>
+        </div>
+
+    </main>
 </body>
 
 <script src="index.js"></script>
