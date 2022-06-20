@@ -19,13 +19,42 @@ espaco[2][2] = document.getElementById('2x2');
 let jogo = false
 
 
+
+
 //Funções-------------------------------------------------------------------------------
 
 function inserirXO(e){
     let linha = Number(e.currentTarget.parentNode.rowIndex)
     let coluna = Number(e.currentTarget.cellIndex)
-    espaco[linha][coluna].innerText = 'X'
+    espaco[linha][coluna].innerText = 'O'
+    testarVitoria('O')
     //alert(linha + ' ' + coluna)
+}
+
+function testarVitoria(simbolo){
+    
+    let contador = 0 //conta simbolos
+
+    for(let i=0 ; i<3; i++){//testa linha
+        for(let j=0 ; j<3; j++){
+            if(espaco[i][j].innerText == simbolo){
+                contador++
+            }else{
+                contador=0;
+                break;
+            }
+        }
+        if(contador >= 3){
+            indicarVitoria();
+            return;
+        }else{
+            contador=0; //zera e testa próxima linha
+        }
+    }
+}
+
+function indicarVitoria(){
+    alert('VITORIA')
 }
 
 //Escutadores---------------------------------------------------------------------------
