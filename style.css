@@ -31,3 +31,7 @@ body{
     border-radius: 10px;
     font-size: 50px;
 }
+
+.espaco:hover{
+    background-color: aliceblue;
+}
