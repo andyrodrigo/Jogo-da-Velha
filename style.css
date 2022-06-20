@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+}
+
+body{
+    background-color: blue;
+
+}
+
+#tabuleiro{
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#grid{
+    background-color: black;
+    width:fit-content;
+    height: fit-content;
+}
+
+.espaco{
+    background-color:aqua;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    font-size: 50px;
+}
