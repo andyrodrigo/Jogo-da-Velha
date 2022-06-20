@@ -17,7 +17,8 @@ espaco[2][2] = document.getElementById('2x2');
 function inserirXO(e){
     let linha = Number(e.currentTarget.parentNode.rowIndex)
     let coluna = Number(e.currentTarget.cellIndex)
-    alert(linha + ' ' + coluna)
+    espaco[linha][coluna].innerText = 'X'
+    //alert(linha + ' ' + coluna)
 }
 
 //Escutadores---------------------------------------------------------------------------
