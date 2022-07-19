@@ -1,5 +1,13 @@
 
 //Variáveis------------------------------------------------------------------------------
+//Caixas
+const caixaX = document.getElementById('X')
+const caixaO = document.getElementById('O')
+const vsCPU = document.getElementById('vsCPU')
+const vsP2 = document.getElementById('vsP2')
+const telaInicial = document.getElementById('telaInicial')
+
+//Tabuleiro
 const espaco = new Array(3)
 espaco[0] = new Array(3)
 espaco[1] = new Array(3)
@@ -18,11 +26,32 @@ espaco[2][2] = document.getElementById('2x2');
 //de jogo
 let jogo = false
 let jogador = 1
+let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 
 
 
 
 //Funções-------------------------------------------------------------------------------
+function teste(){
+    window.alert('teste')
+}
+
+function mudaSimbolo( simbolo ){
+    if( simbolo == 'X' && simboloJogador != "X"){
+        simboloJogador = "X"
+        caixaX.style.backgroundColor = "rgb(128, 150, 161)";
+        caixaO.style.backgroundColor = "rgb(25, 42, 50)";
+    }else if ( simbolo == 'O' && simboloJogador != "O" ){
+        simboloJogador = "O"
+        caixaO.style.backgroundColor = "rgb(128, 150, 161)";
+        caixaX.style.backgroundColor = "rgb(25, 42, 50)";
+    }
+}
+
+function iniciar(){
+    telaInicial.style.display = 'none';
+    //window.alert('iniciar')
+}
 
 function inserirXO(e){
     
@@ -87,6 +116,10 @@ function indicarVitoria(){
 //Escutadores---------------------------------------------------------------------------
 
 function escutadores(){
+    vsCPU.addEventListener('click', iniciar)
+    vsP2.addEventListener('click', iniciar)
+    caixaX.addEventListener('click', function(){mudaSimbolo("X")})
+    caixaO.addEventListener('click', function(){mudaSimbolo("O")})
     espaco[0][0].addEventListener('click', inserirXO)
     espaco[0][1].addEventListener('click', inserirXO)
     espaco[0][2].addEventListener('click', inserirXO)

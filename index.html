@@ -14,18 +14,34 @@
 
     <div class="tela flex">
 
-        <div id="selecao" class="janela flex">
-            <p>ESCOLHA O SEU SÍMBOLO</p>
-            <div>XO</div>
-            <p>Lembra-se, o X começa</p>
-        </div>
-
-        <div id="vsCPU"class="janela opcao flex">
-            <span> NOVO JOGO (VS CPU)</span>
-        </div>
-
-        <div id="vsP2" class="janela opcao flex">
-            <span> NOVO JOGO (VS JOGADOR 2)</span>
+        <div id="telaInicial">
+            <div id="selecao" class="janela flex">
+                <div class="flex caixinha">
+                    <p>ESCOLHA O SEU SÍMBOLO</p>
+                </div>
+    
+                <div id="XouO" class="flex caixinha">
+                      <button id="X" class="simbolo">
+                        <img src="imagens/Xx.png" alt="Simbolo X">
+                      </button>
+                      <button id="O" class="simbolo">
+                        <img src="imagens/Oo.png" alt="Simbolo O">
+                      </button>
+                </div>
+    
+                <div class="flex caixinha">
+                    <p>Lembre-se, o X começa</p>
+                </div>
+                
+            </div>
+    
+            <button id="vsCPU"class="janela opcao flex">
+                NOVO JOGO (VS CPU)
+            </button>
+    
+            <button id="vsP2" class="janela opcao flex">
+                NOVO JOGO (VS JOGADOR 2)
+            </button>
         </div>
 
     </div>
@@ -69,7 +85,7 @@
 
     </main>
 </body>
-
-<script src="index.js"></script>-->
+-->
+<script src="index.js"></script>
 
 </html>
