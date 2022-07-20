@@ -12,8 +12,9 @@
 
 <body>
 
-    <div class="tela flex">
+    <main class="tela flex">
 
+        <!-- Configurações do Inicio do Jogo-->
         <div id="telaInicial">
             <div id="selecao" class="janela flex">
                 <div class="flex caixinha">
@@ -44,23 +45,31 @@
             </button>
         </div>
 
-    </div>
+        <!-- Tela do Jogo -->
+        <div id="telaTabuleiro">
+            <div id="tabuleiro">
+                <table id="tabela">
+                    <tr class="linha">
+                        <th id="0x0" class="espaco"> </th>
+                        <th id="0x1" class="espaco"> </th>
+                        <th id="0x2" class="espaco"> </th>
+                    </tr>
+                    <tr class="linha">
+                        <th id="1x0" class="espaco"> </th>
+                        <th id="1x1" class="espaco"> </th>
+                        <th id="1x2" class="espaco"> </th>
+                    </tr>
+                    <tr class="linha">
+                        <th id="2x0" class="espaco"> </th>
+                        <th id="2x1" class="espaco"> </th>
+                        <th id="2x2" class="espaco"> </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
 
 <!--
-    <div id="inicio">
-
-        <div id="selecionaXO">
-            <p>ESCOLHA O SEU SÍMBOLO</p>
-            <div>XO</div>
-            <p>Lembra-se, o X começa</p>
-        </div>
-
-    </div>
-
-    <p>simbolos</p>
-
-    <p>Novo Jogo (VS PC)</p>
-    <p>Novo Jogo (Jogador VS Jogador)</p>
 
     <main>
         <div id="tabuleiro">

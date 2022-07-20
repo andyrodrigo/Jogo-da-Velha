@@ -91,30 +91,8 @@
     background-color: rgb(79, 226, 220);
 }
 
-/*------------------------*/
-main{
-    background-color: brown;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
-
-#inicio{
-    background-color: rgb(25, 42, 50);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-}
-
-#selecionaXO{
-    height: 150px;
-    width: 400px;
-    background-color: rgb(31, 53, 64);
-    box-shadow: 0px 5px rgb(16, 33, 41);
-    border-radius: 10px;
+#telaTabuleiro{
+    display: none;
 }
 
 #tabuleiro{
@@ -122,7 +100,6 @@ main{
     display: flex;
     flex-direction:row;
     align-items: center;
-
 }
 
 #tabela{
@@ -145,3 +122,19 @@ main{
 .espaco:hover{
     background-color: aliceblue;
 }
+
+/*------------------------*/
+
+
+
+/*
+main{
+    background-color: brown;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+*/

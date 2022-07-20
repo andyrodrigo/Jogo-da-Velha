@@ -6,6 +6,7 @@ const caixaO = document.getElementById('O')
 const vsCPU = document.getElementById('vsCPU')
 const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
+const telaTabuleiro = document.getElementById('telaTabuleiro')
 
 //Tabuleiro
 const espaco = new Array(3)
@@ -50,6 +51,7 @@ function mudaSimbolo( simbolo ){
 
 function iniciar(){
     telaInicial.style.display = 'none';
+    telaTabuleiro.style.display = 'block';
     //window.alert('iniciar')
 }
 
