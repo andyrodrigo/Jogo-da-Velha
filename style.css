@@ -91,8 +91,55 @@
     background-color: rgb(79, 226, 220);
 }
 
-#telaTabuleiro{
+#telaInicial{
     display: none;
+}
+
+#telaTabuleiro{
+    display: block;
+}
+.exibicao{
+    font-size: larger;
+    color: aqua;
+    justify-content:space-between;
+}
+
+#XO{
+    height: 40px;
+    width: fit-content;
+}
+
+#XO > img{
+    height: 30px;
+    width: 30px;
+}
+
+#turno{
+    background-color: rgb(31, 53, 64);
+    box-shadow: 0px 5px rgb(16, 33, 41);
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    justify-content:space-evenly;
+    color: rgb(168, 190, 201);
+}
+
+#turno > img{
+    height: 20px;
+    width: 20px;
+}
+
+#volta{
+    background-color: rgb(168, 190, 201);
+    box-shadow: 0px 5px rgb(138, 160, 181);
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+}
+
+#volta > img{
+    height: 20px;
+    width: 20px;
 }
 
 #tabuleiro{
@@ -106,6 +153,7 @@
     background-color: black;
     width:fit-content;
     height: fit-content;
+    margin-top: 30px;
 }
 
 .espaco{

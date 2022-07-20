@@ -47,9 +47,25 @@
 
         <!-- Tela do Jogo -->
         <div id="telaTabuleiro">
-            <div id="tabuleiro">
+
+            <div id="tabuleiro flex">
+
+                <div id="info" class="flex exibicao" >
+                    <div id="XO" class="flex">
+                        <img src="imagens/Xx.png" alt="Simbolo X">
+                        <img src="imagens/Oo.png" alt="Simbolo O">
+                    </div>
+                    <div id="turno" class="flex">
+                        <p>TURNO</p>
+                        <img src="imagens/Xx.png" alt="Simbolo X">
+                    </div>
+                    <div id="volta" class="flex">
+                        <img src="imagens/volta.png" alt="Simbolo de retorno">
+                    </div>
+                </div>
+
                 <table id="tabela">
-                    <tr class="linha">
+                    <tr class="linha ">
                         <th id="0x0" class="espaco"> </th>
                         <th id="0x1" class="espaco"> </th>
                         <th id="0x2" class="espaco"> </th>
@@ -65,6 +81,13 @@
                         <th id="2x2" class="espaco"> </th>
                     </tr>
                 </table>
+
+                <div id="placar" class="flex exibicao">
+                    <div>você</div>
+                    <div>Empates</div>
+                    <div>CPU</div>
+                </div>
+
             </div>
         </div>
     </main>
