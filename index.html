@@ -48,7 +48,7 @@
         <!-- Tela do Jogo -->
         <div id="telaTabuleiro">
 
-            <div id="tabuleiro flex">
+            <div>
 
                 <div id="info" class="flex exibicao" >
                     <div id="XO" class="flex">
@@ -64,23 +64,59 @@
                     </div>
                 </div>
 
+                <div id="tabuleiro" class="flex">
+                    <div class="linha flex">
+                        <div class="espaco flex" id="0x0"></div>
+                        <div class="espaco flex" id="0x1"></div>
+                        <div class="espaco flex" id="0x2"></div>
+                    </div>
+                    <div id="meio" class="linha flex">
+                        <div class="espaco flex" id="1x0"></div>
+                        <div class="espaco flex" id="1x1"></div>
+                        <div class="espaco flex" id="1x2"></div>
+                    </div>
+                    <div class="linha flex">
+                        <div class="espaco flex" id="2x0"></div>
+                        <div class="espaco flex" id="2x1"></div>
+                        <div class="espaco flex" id="2x2"></div>
+                    </div>
+                </div>
+
+<!--
+                <div id="tabuleiro flex">
+                    <div>
+                        <div id="0x0" class="espaco"> </div>
+                        <div id="0x1" class="espaco"> </div>
+                        <div id="0x2" class="espaco"> </div>
+                    </div>
+                    <div>
+                        <div id="1x0" class="espaco"> </div>
+                        <div id="1x1" class="espaco"> </div>
+                        <div id="1x2" class="espaco"> </div>
+                    </div>
+                    <div>
+                        <div id="2x0" class="espaco"> </div>
+                        <div id="2x1" class="espaco"> </div>
+                        <div id="2x2" class="espaco"> </div>
+                    </div>
+                </div>
+
+
                 <table id="tabela">
-                    <tr class="linha ">
-                        <th id="0x0" class="espaco"> </th>
-                        <th id="0x1" class="espaco"> </th>
-                        <th id="0x2" class="espaco"> </th>
+                    <tr class="linha">
+
                     </tr>
                     <tr class="linha">
-                        <th id="1x0" class="espaco"> </th>
-                        <th id="1x1" class="espaco"> </th>
-                        <th id="1x2" class="espaco"> </th>
+                        <td id="1x0" class="espaco"> </td>
+                        <td id="1x1" class="espaco"> </td>
+                        <td id="1x2" class="espaco"> </td>
                     </tr>
                     <tr class="linha">
-                        <th id="2x0" class="espaco"> </th>
-                        <th id="2x1" class="espaco"> </th>
-                        <th id="2x2" class="espaco"> </th>
+                        <td id="2x0" class="espaco"> </td>
+                        <td id="2x1" class="espaco"> </td>
+                        <td id="2x2" class="espaco"> </td>
                     </tr>
-                </table>
+                </table>-->
 
                 <div id="placar" class="flex exibicao">
                     <div id="placar1p" class="placar flex">

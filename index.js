@@ -55,24 +55,47 @@ function iniciar(){
     //window.alert('iniciar')
 }
 
+function inserirXO( linha, coluna){
+    //alert(linha+ "x" + coluna)
+    let simbolo
+    if(jogador == 1){
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
+        simbolo = 'X'
+        jogador = 2;
+    }else{
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
+        simbolo = 'O' 
+        jogador = 1;
+    }
+    espaco[linha][coluna].innerText = simbolo
+    testarVitoria(simbolo)
+}
+
+ /*
+ //Se fosse um tabela
 function inserirXO(e){
-    
+
     let linha = Number(e.currentTarget.parentNode.rowIndex)
     let coluna = Number(e.currentTarget.cellIndex)
     let simbolo
     
     if(jogador == 1){
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/X.png")';
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
         simbolo = 'X'
         jogador = 2;
     }else{
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/O.png")';
+        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
         simbolo = 'O' 
         jogador = 1;
     }
     espaco[linha][coluna].innerText = simbolo
     testarVitoria(simbolo)
 
+}*/
+
+function inserirSimbolo( ){
+
+    espaco[0][0].appendChild(simboloX);
 }
 
 function testarVitoria(simbolo){
@@ -122,7 +145,16 @@ function escutadores(){
     vsP2.addEventListener('click', iniciar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})
-    espaco[0][0].addEventListener('click', inserirXO)
+    espaco[0][0].addEventListener('click', function(){inserirXO(0,0)} )
+    espaco[0][1].addEventListener('click', function(){inserirXO(0,1)})
+    espaco[0][2].addEventListener('click', function(){inserirXO(0,2)})
+    espaco[1][0].addEventListener('click', function(){inserirXO(1,0)})
+    espaco[1][1].addEventListener('click', function(){inserirXO(1,1)})
+    espaco[1][2].addEventListener('click', function(){inserirXO(1,2)})
+    espaco[2][0].addEventListener('click', function(){inserirXO(2,0)})
+    espaco[2][1].addEventListener('click', function(){inserirXO(2,1)})
+    espaco[2][2].addEventListener('click', function(){inserirXO(2,2)})
+    /*espaco[0][0].addEventListener('click', inserirXO )
     espaco[0][1].addEventListener('click', inserirXO)
     espaco[0][2].addEventListener('click', inserirXO)
     espaco[1][0].addEventListener('click', inserirXO)
@@ -130,8 +162,7 @@ function escutadores(){
     espaco[1][2].addEventListener('click', inserirXO)
     espaco[2][0].addEventListener('click', inserirXO)
     espaco[2][1].addEventListener('click', inserirXO)
-    espaco[2][2].addEventListener('click', inserirXO)
-
+    espaco[2][2].addEventListener('click', inserirXO)*/
 }
 
 //--------------------------------------------------------------------------------------

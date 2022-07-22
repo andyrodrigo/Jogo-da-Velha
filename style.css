@@ -92,7 +92,7 @@
 }
 
 #telaInicial{
-    display: none;
+    display: none ;
 }
 
 #telaTabuleiro{
@@ -118,7 +118,7 @@
     background-color: rgb(31, 53, 64);
     box-shadow: 0px 5px rgb(16, 33, 41);
     height: 40px;
-    width: 100px;
+    width: 90px;
     border-radius: 10px;
     justify-content:space-evenly;
     color: rgb(168, 190, 201);
@@ -142,23 +142,37 @@
     width: 20px;
 }
 
-#tabuleiro{
-    background-color: grey;
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-}
-
 #tabela{
-    background-color: black;
     width:fit-content;
     height: fit-content;
     margin-top: 30px;
     margin-bottom: 30px;
+    border-collapse: separate;
+    border-spacing: 0px 10px
+}
+#tabuleiro{
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width:320px;
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+
+#meio{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.linha{
+    flex-wrap: nowrap;
+    justify-content:space-between;
 }
 
 .espaco{
-    background-color:aqua;
+    background-color: rgb(31, 53, 64);
+    box-shadow: 0px 5px rgb(16, 33, 41);
     background-image: none;
     background-size: cover;
     width: 100px;
@@ -169,7 +183,12 @@
 }
 
 .espaco:hover{
-    background-color: aliceblue;
+    background-color: rgb(168, 190, 201);
+}
+
+.espaco > img{
+    width: 60px;
+    height: 60px;
 }
 
 .placar{
@@ -177,7 +196,7 @@
     text-align: center;
     color: black;
     height: 60px;
-    width: 100px;
+    width: 90px;
     border-radius: 10px;
 }
 
