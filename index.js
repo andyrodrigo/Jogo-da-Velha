@@ -136,7 +136,20 @@ function testarVitoria(simbolo){
 
 function indicarVitoria(){
     alert('VITORIA')
+    reiniciar();
 }
+
+function reiniciar(){
+    //apaga textos e simbolo de todos os espaços
+    for(let i=0 ; i<3; i++){
+        for(let j=0 ; j<3; j++){
+            espaco[i][j].style.backgroundImage = 'none';
+            espaco[i][j].innerText = "";
+        }
+    }
+    jogador = 1
+}
+
 
 //Escutadores---------------------------------------------------------------------------
 
