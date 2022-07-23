@@ -23,11 +23,19 @@ espaco[1][2] = document.getElementById('1x2');
 espaco[2][0] = document.getElementById('2x0');
 espaco[2][1] = document.getElementById('2x1');
 espaco[2][2] = document.getElementById('2x2');
+/*
+//Matriz Auxiliar
+const matrizAux = new Array(3)
+matrizAux[0] = new Array(3)
+matrizAux[1] = new Array(3)
+matrizAux[2] = new Array(3)*/
+
 
 //de jogo
 let jogo = false
 let jogador = 1
 let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
+let simbolos = 0;
 
 
 
@@ -67,6 +75,7 @@ function inserirXO( linha, coluna){
         simbolo = 'O' 
         jogador = 1;
     }
+    simbolos += 1;
     espaco[linha][coluna].innerText = simbolo
     testarVitoria(simbolo)
 }
@@ -91,12 +100,12 @@ function inserirXO(e){
     espaco[linha][coluna].innerText = simbolo
     testarVitoria(simbolo)
 
-}*/
+}
 
 function inserirSimbolo( ){
 
     espaco[0][0].appendChild(simboloX);
-}
+}*/
 
 function testarVitoria(simbolo){
     
@@ -130,12 +139,20 @@ function testarVitoria(simbolo){
         }else{
             contadorL=0;
             contadorC=0;
+            if(simbolos == 9){
+                indicarEmpate();
+            }
         }
     }
 }
 
 function indicarVitoria(){
     alert('VITORIA')
+    reiniciar();
+}
+
+function indicarEmpate(){
+    alert('EMPATE')
     reiniciar();
 }
 
@@ -147,7 +164,8 @@ function reiniciar(){
             espaco[i][j].innerText = "";
         }
     }
-    jogador = 1
+    jogador = 1;
+    simbolos = 0;
 }
 
 
