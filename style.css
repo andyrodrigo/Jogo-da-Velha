@@ -92,12 +92,13 @@
 }
 
 #telaInicial{
-    display: none ;
+    display: block ;
 }
 
 #telaTabuleiro{
-    display: block;
+    display: none;
 }
+
 .exibicao{
     font-size: larger;
     color: aqua;
@@ -135,6 +136,11 @@
     height: 40px;
     width: 40px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+#volta:hover{
+    background-color: rgb(208, 220, 241);
 }
 
 #volta > img{
@@ -180,6 +186,7 @@
     border-radius: 10px;
     font-size: 50px;
     color: transparent;
+    cursor: pointer;
 }
 
 .espaco:hover{

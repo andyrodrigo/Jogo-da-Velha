@@ -7,9 +7,17 @@ const vsCPU = document.getElementById('vsCPU')
 const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
 const telaTabuleiro = document.getElementById('telaTabuleiro')
+const idP1 = document.getElementById('idP1')
+const idP2 = document.getElementById('idP2')
 const cont1p = document.getElementById('cont1p')
 const contEmpate = document.getElementById('contEmpate')
 const cont2p = document.getElementById('cont2p')
+const volta = document.getElementById("volta");
+const turno = document.getElementById('turno')
+const simbX = document.getElementById('simbX')
+const simbO = document.createElement("IMG");
+simbO.src = "imagens/Oo.png";
+
 
 
 //Tabuleiro
@@ -62,23 +70,35 @@ function mudaSimbolo( simbolo ){
 }
 
 function iniciar(){
+    if( simboloJogador == "X" ){
+        idP1.innerText = "X (você)";
+        idP2.innerText = "O (CPU)";
+    }else{
+        idP1.innerText = "O (CPU)";
+        idP2.innerText = "X (você)";
+    }
     telaInicial.style.display = 'none';
     telaTabuleiro.style.display = 'block';
     //window.alert('iniciar')
 }
 
 function inserirXO( linha, coluna){
-    //alert(linha+ "x" + coluna)
+
     let simbolo
     let jogadorAtual = jogador;
+
     if(jogadorAtual == 1){
         espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
         simbolo = 'X'
         jogador = 2;
+        turno.removeChild(simbX);
+        turno.appendChild(simbO);
     }else{
         espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
         simbolo = 'O' 
         jogador = 1;
+        turno.removeChild(simbO);
+        turno.appendChild(simbX);
     }
     simbolos += 1;
     espaco[linha][coluna].innerText = simbolo
@@ -180,6 +200,22 @@ function reiniciar(){
     }
     jogador = 1;
     simbolos = 0;
+    turno.appendChild(simbO);
+    turno.removeChild(simbO);
+    turno.appendChild(simbX);
+}
+
+function voltar(){
+    //Limpa Tabuleiro
+    reiniciar();
+    //Zera Placar
+    let num = Number(0);
+    cont1p.innerText = String(num);
+    contEmpate.innerText = String(num);
+    cont2p.innerText = String(num);
+    //Troca de Tela
+    telaTabuleiro.style.display = 'none';
+    telaInicial.style.display = 'block';
 }
 
 
@@ -188,6 +224,7 @@ function reiniciar(){
 function escutadores(){
     vsCPU.addEventListener('click', iniciar)
     vsP2.addEventListener('click', iniciar)
+    volta.addEventListener('click', voltar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})
     espaco[0][0].addEventListener('click', function(){inserirXO(0,0)} )
