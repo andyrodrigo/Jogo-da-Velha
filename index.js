@@ -7,6 +7,10 @@ const vsCPU = document.getElementById('vsCPU')
 const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
 const telaTabuleiro = document.getElementById('telaTabuleiro')
+const cont1p = document.getElementById('cont1p')
+const contEmpate = document.getElementById('contEmpate')
+const cont2p = document.getElementById('cont2p')
+
 
 //Tabuleiro
 const espaco = new Array(3)
@@ -66,7 +70,8 @@ function iniciar(){
 function inserirXO( linha, coluna){
     //alert(linha+ "x" + coluna)
     let simbolo
-    if(jogador == 1){
+    let jogadorAtual = jogador;
+    if(jogadorAtual == 1){
         espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
         simbolo = 'X'
         jogador = 2;
@@ -77,7 +82,7 @@ function inserirXO( linha, coluna){
     }
     simbolos += 1;
     espaco[linha][coluna].innerText = simbolo
-    testarVitoria(simbolo)
+    testarVitoria(simbolo, jogadorAtual)
 }
 
  /*
@@ -107,7 +112,7 @@ function inserirSimbolo( ){
     espaco[0][0].appendChild(simboloX);
 }*/
 
-function testarVitoria(simbolo){
+function testarVitoria(simbolo, jogadorAtual){
     
     let contadorL = 0 //conta linha 
     let contadorC = 0 //conta colunas
@@ -134,7 +139,7 @@ function testarVitoria(simbolo){
             }
         }
         if(contadorL >= 3 || contadorC >= 3 || contadorDD >= 3 || contadorDS >= 3){
-            indicarVitoria();
+            indicarVitoria( jogadorAtual );
             return;
         }else{
             contadorL=0;
@@ -146,13 +151,22 @@ function testarVitoria(simbolo){
     }
 }
 
-function indicarVitoria(){
-    alert('VITORIA')
+function indicarVitoria( jogadorAtual ){
+    alert('VITORIA DO JOGADOR ' + jogadorAtual )
+    if( jogadorAtual == 1){
+        let num = Number(cont1p.innerText);
+        cont1p.innerText = String(++num);
+    }else{
+        let num = Number(cont2p.innerText);
+        cont2p.innerText = String(++num);
+    }   
     reiniciar();
 }
 
 function indicarEmpate(){
     alert('EMPATE')
+    let num = Number(contEmpate.innerText);
+    contEmpate.innerText = String(++num);
     reiniciar();
 }
 
