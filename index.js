@@ -141,7 +141,7 @@ function inserirXO( linha, coluna){
             }
             simbolos += 1;
             espaco[linha][coluna].innerText = simbolo
-            
+
             testarVitoria(simbolo, jogadorAtual)
 
             //Se for contra a CPU
@@ -267,17 +267,19 @@ function reiniciar(){
 }
 
 function voltar(){
-    jogo = false
-    //Limpa Tabuleiro
-    reiniciar();
-    //Zera Placar
-    let num = Number(0);
-    cont1p.innerText = String(num);
-    contEmpate.innerText = String(num);
-    cont2p.innerText = String(num);
-    //Troca de Tela
-    telaTabuleiro.style.display = 'none';
-    telaInicial.style.display = 'block';
+    if(jogo){
+        jogo = false
+        //Limpa Tabuleiro
+        reiniciar();
+        //Zera Placar
+        let num = Number(0);
+        cont1p.innerText = String(num);
+        contEmpate.innerText = String(num);
+        cont2p.innerText = String(num);
+        //Troca de Tela
+        telaTabuleiro.style.display = 'none';
+        telaInicial.style.display = 'block';
+    }
 }
 
 
