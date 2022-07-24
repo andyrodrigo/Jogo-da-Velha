@@ -46,8 +46,12 @@ matrizAux[2] = new Array(3)*/
 //de jogo
 let jogo = false
 let jogador = 1
+let cpu = true;
+let cpuTurno = false;
 let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 let simbolos = 0;
+
+let testeN = 0;
 
 
 
@@ -69,42 +73,88 @@ function mudaSimbolo( simbolo ){
     }
 }
 
-function iniciar(){
+function iniciar( modo ){
     if( simboloJogador == "X" ){
-        idP1.innerText = "X (você)";
-        idP2.innerText = "O (CPU)";
+        if( modo == "cpu"){
+            cpu = true;
+            cpuTurno = false;
+            idP1.innerText = "X (você)";
+            idP2.innerText = "O (CPU)";
+        }else{
+            cpu = false;
+            idP1.innerText = "X (Você)";
+            idP2.innerText = "O (P2)";
+        }     
     }else{
-        idP1.innerText = "O (CPU)";
-        idP2.innerText = "X (você)";
+        if( modo == "cpu"){
+            cpu = true;
+            cpuTurno = true;
+            idP1.innerText = "O (CPU)";
+            idP2.innerText = "X (você)";
+        }else{
+            cpu = false;
+            idP1.innerText = "X (P2)";
+            idP2.innerText = "O (Você)";
+        }   
     }
     telaInicial.style.display = 'none';
     telaTabuleiro.style.display = 'block';
-    //window.alert('iniciar')
+    jogo = true
+
+    if(cpu){
+        jogadaCPU();
+    }
+
+}
+
+function jogadaCPU(){
+    if(cpuTurno){
+        cpuTurno = false;
+        inserirXO( testeN, testeN);
+        testeN++;      
+    }else{
+        cpuTurno = true;
+    } 
 }
 
 function inserirXO( linha, coluna){
+    
+    if(jogo){
+        //Testa se já existe simbolo
+        if(espaco[linha][coluna].innerText == ""){
 
-    let simbolo
-    let jogadorAtual = jogador;
+            let simbolo
+            let jogadorAtual = jogador;
+    
+            if(jogadorAtual == 1){
+                espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
+                simbolo = 'X'
+                jogador = 2;
+                turno.removeChild(simbX);
+                turno.appendChild(simbO);
+            }else{
+                espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
+                simbolo = 'O' 
+                jogador = 1;
+                turno.removeChild(simbO);
+                turno.appendChild(simbX);
+            }
+            simbolos += 1;
+            espaco[linha][coluna].innerText = simbolo
+            
+            testarVitoria(simbolo, jogadorAtual)
 
-    if(jogadorAtual == 1){
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
-        simbolo = 'X'
-        jogador = 2;
-        turno.removeChild(simbX);
-        turno.appendChild(simbO);
-    }else{
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
-        simbolo = 'O' 
-        jogador = 1;
-        turno.removeChild(simbO);
-        turno.appendChild(simbX);
+            //Se for contra a CPU
+            if(cpu){
+                jogadaCPU();
+            }
+        }
     }
-    simbolos += 1;
-    espaco[linha][coluna].innerText = simbolo
-    testarVitoria(simbolo, jogadorAtual)
 }
 
+function estrategia(){
+
+}
  /*
  //Se fosse um tabela
 function inserirXO(e){
@@ -203,9 +253,21 @@ function reiniciar(){
     turno.appendChild(simbO);
     turno.removeChild(simbO);
     turno.appendChild(simbX);
+    jogo = true
+
+    testeN=0;
+    if(cpu){
+        if( simboloJogador == "X" ){
+            cpuTurno = false; 
+        }else{
+            cpuTurno = true;
+        }
+        jogadaCPU();
+    }
 }
 
 function voltar(){
+    jogo = false
     //Limpa Tabuleiro
     reiniciar();
     //Zera Placar
@@ -222,8 +284,8 @@ function voltar(){
 //Escutadores---------------------------------------------------------------------------
 
 function escutadores(){
-    vsCPU.addEventListener('click', iniciar)
-    vsP2.addEventListener('click', iniciar)
+    vsCPU.addEventListener('click', function(){iniciar("cpu")})
+    vsP2.addEventListener('click', function(){iniciar("p2")} )
     volta.addEventListener('click', voltar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})
