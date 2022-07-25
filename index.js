@@ -7,12 +7,16 @@ const vsCPU = document.getElementById('vsCPU')
 const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
 const telaTabuleiro = document.getElementById('telaTabuleiro')
+const telaVitoria = document.getElementById('telaVitoria')
 const idP1 = document.getElementById('idP1')
 const idP2 = document.getElementById('idP2')
 const cont1p = document.getElementById('cont1p')
 const contEmpate = document.getElementById('contEmpate')
 const cont2p = document.getElementById('cont2p')
+const quemVenceu = document.getElementById('quemVenceu')
 const volta = document.getElementById("volta");
+const sair = document.getElementById("sair");
+const outra = document.getElementById("outra");
 const turno = document.getElementById('turno')
 const simbX = document.getElementById('simbX')
 const simbO = document.createElement("IMG");
@@ -50,6 +54,8 @@ let cpu = true;
 let cpuTurno = false;
 let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 let simbolos = 0;
+let jogador1 = " p1 ";
+let jogador2 = " p2 ";
 
 let testeN = 0;
 
@@ -75,26 +81,32 @@ function mudaSimbolo( simbolo ){
 
 function iniciar( modo ){
     if( simboloJogador == "X" ){
+        jogador1 = "VOCÊ";
         if( modo == "cpu"){
             cpu = true;
             cpuTurno = false;
             idP1.innerText = "X (você)";
             idP2.innerText = "O (CPU)";
+            jogador2 = "CPU";
         }else{
             cpu = false;
             idP1.innerText = "X (Você)";
             idP2.innerText = "O (P2)";
+            jogador2 = "Oponente";
         }     
     }else{
+        jogador2 = "VOCÊ";
         if( modo == "cpu"){
             cpu = true;
             cpuTurno = true;
             idP1.innerText = "O (CPU)";
             idP2.innerText = "X (você)";
+            jogador1 = "CPU";
         }else{
             cpu = false;
             idP1.innerText = "X (P2)";
             idP2.innerText = "O (Você)";
+            jogador1 = "Oponente";
         }   
     }
     telaInicial.style.display = 'none';
@@ -108,13 +120,15 @@ function iniciar( modo ){
 }
 
 function jogadaCPU(){
-    if(cpuTurno){
-        cpuTurno = false;
-        inserirXO( testeN, testeN);
-        testeN++;      
-    }else{
-        cpuTurno = true;
-    } 
+    if(jogo){
+        if(cpuTurno){
+            cpuTurno = false;
+            inserirXO( testeN, testeN);
+            testeN++;      
+        }else{
+            cpuTurno = true;
+        } 
+    }
 }
 
 function inserirXO( linha, coluna){
@@ -209,6 +223,7 @@ function testarVitoria(simbolo, jogadorAtual){
             }
         }
         if(contadorL >= 3 || contadorC >= 3 || contadorDD >= 3 || contadorDS >= 3){
+            jogo = false;
             indicarVitoria( jogadorAtual );
             return;
         }else{
@@ -222,15 +237,20 @@ function testarVitoria(simbolo, jogadorAtual){
 }
 
 function indicarVitoria( jogadorAtual ){
-    alert('VITORIA DO JOGADOR ' + jogadorAtual )
+    //alert('VITORIA DO JOGADOR ' + jogadorAtual )
+    let vitorioso;
     if( jogadorAtual == 1){
+        vitorioso = jogador1
         let num = Number(cont1p.innerText);
         cont1p.innerText = String(++num);
     }else{
+        vitorioso = jogador2
         let num = Number(cont2p.innerText);
         cont2p.innerText = String(++num);
-    }   
-    reiniciar();
+    }
+    quemVenceu.innerText = vitorioso + " VENCEU!"
+    telaVitoria.style.display = 'flex';
+    //reiniciar();
 }
 
 function indicarEmpate(){
@@ -254,6 +274,7 @@ function reiniciar(){
     turno.removeChild(simbO);
     turno.appendChild(simbX);
     jogo = true
+    telaVitoria.style.display = 'none';
 
     testeN=0;
     if(cpu){
@@ -267,19 +288,19 @@ function reiniciar(){
 }
 
 function voltar(){
-    if(jogo){
-        jogo = false
-        //Limpa Tabuleiro
-        reiniciar();
-        //Zera Placar
-        let num = Number(0);
-        cont1p.innerText = String(num);
-        contEmpate.innerText = String(num);
-        cont2p.innerText = String(num);
-        //Troca de Tela
-        telaTabuleiro.style.display = 'none';
-        telaInicial.style.display = 'block';
-    }
+    jogo = false
+    //Limpa Tabuleiro
+    reiniciar();
+    //Zera Placar
+    let num = Number(0);
+    cont1p.innerText = String(num);
+    contEmpate.innerText = String(num);
+    cont2p.innerText = String(num);
+    //Troca de Tela
+    telaTabuleiro.style.display = 'none';
+    telaVitoria.style.display = 'none';
+    telaInicial.style.display = 'block';
+
 }
 
 
@@ -289,6 +310,8 @@ function escutadores(){
     vsCPU.addEventListener('click', function(){iniciar("cpu")})
     vsP2.addEventListener('click', function(){iniciar("p2")} )
     volta.addEventListener('click', voltar)
+    sair.addEventListener('click', voltar)
+    outra.addEventListener('click', reiniciar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})
     espaco[0][0].addEventListener('click', function(){inserirXO(0,0)} )

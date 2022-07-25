@@ -23,14 +23,15 @@
 }
 
 #telaInicial{
-    display: none ;
+    display: block ;
 }
 
 #telaTabuleiro{
-    display:block;
+    display: none;
 }
 
 #telaVitoria{
+    display: none;
     background-color: rgb(0, 0, 0, 0.5);
     position: absolute;
     width: 100vw;
