@@ -8,6 +8,9 @@ const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
 const telaTabuleiro = document.getElementById('telaTabuleiro')
 const telaVitoria = document.getElementById('telaVitoria')
+const vitoriaX = document.getElementById('vitoriaX')
+const vitoriaO = document.getElementById('vitoriaO')
+const ganhouMsg = document.getElementById('ganhouMsg')
 const idP1 = document.getElementById('idP1')
 const idP2 = document.getElementById('idP2')
 const cont1p = document.getElementById('cont1p')
@@ -340,12 +343,21 @@ function indicarVitoria( jogadorAtual ){
         vitorioso = jogador1
         let num = Number(cont1p.innerText);
         cont1p.innerText = String(++num);
+        vitoriaO.style.display = 'none'
+        vitoriaX.style.display = 'block'
+        ganhouMsg.style.color = "rgb(49, 196, 190)"
     }else{
         vitorioso = jogador2
         let num = Number(cont2p.innerText);
         cont2p.innerText = String(++num);
+        vitoriaO.style.display = 'block'
+        vitoriaX.style.display = 'none'
+        ganhouMsg.style.color = "rgb(242, 178, 55)"
     }
+    
     quemVenceu.innerText = vitorioso + " VENCEU!"
+    ganhouMsg.innerText = "GANHOU A PARTIDA"
+    
     telaVitoria.style.display = 'flex';
 
 }
@@ -355,7 +367,11 @@ function indicarEmpate(){
     let num = Number(contEmpate.innerText);
     contEmpate.innerText = String(++num);
  
+    vitoriaO.style.display = 'none'
+    vitoriaX.style.display = 'none'
     quemVenceu.innerText = "VOCÊ EMPATOU"
+    ganhouMsg.innerText = "NINGUEM GANHOU A PARTIDA"
+    ganhouMsg.style.color = "rgb(168, 190, 201)"
     telaVitoria.style.display = 'flex';
 
 }
