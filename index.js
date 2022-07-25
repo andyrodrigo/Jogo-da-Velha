@@ -39,6 +39,9 @@ espaco[1][2] = document.getElementById('1x2');
 espaco[2][0] = document.getElementById('2x0');
 espaco[2][1] = document.getElementById('2x1');
 espaco[2][2] = document.getElementById('2x2');
+
+//Array Auxiliar para estrategias da CPU
+let auxiliar = [1,2,3, 4,5,6, 7,8,9]
 /*
 //Matriz Auxiliar
 const matrizAux = new Array(3)
@@ -80,6 +83,8 @@ function mudaSimbolo( simbolo ){
 }
 
 function iniciar( modo ){
+
+    auxiliar = [1,2,3, 4,5,6, 7,8,9]
     if( simboloJogador == "X" ){
         jogador1 = "VOCÊ";
         if( modo == "cpu"){
@@ -123,8 +128,11 @@ function jogadaCPU(){
     if(jogo){
         if(cpuTurno){
             cpuTurno = false;
-            inserirXO( testeN, testeN);
-            testeN++;      
+            let area = [ 0, 0];
+            area = estrategia()
+            inserirXO( area[0], area[1]);
+            //inserirXO( testeN, testeN);
+            //testeN++;      
         }else{
             cpuTurno = true;
         } 
@@ -142,12 +150,14 @@ function inserirXO( linha, coluna){
     
             if(jogadorAtual == 1){
                 espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
+                retirar(linha,coluna)
                 simbolo = 'X'
                 jogador = 2;
                 turno.removeChild(simbX);
                 turno.appendChild(simbO);
             }else{
                 espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
+                retirar(linha,coluna)
                 simbolo = 'O' 
                 jogador = 1;
                 turno.removeChild(simbO);
@@ -166,8 +176,89 @@ function inserirXO( linha, coluna){
     }
 }
 
-function estrategia(){
+function retirar( linha, coluna){
+    let num;
+    switch(linha){
+        case 0:
+            switch(coluna){
+                case 0:
+                    num = 1
+                    break;
+                case 1:
+                    num = 2
+                    break;
+                case 2:
+                    num = 3
+                    break;
+                default:
+                    alert("erro")
+            }
+            break;
+        case 1:
+            switch(coluna){
+                case 0:
+                    num = 4
+                    break;
+                case 1:
+                    num = 5
+                    break;
+                case 2:
+                    num = 6
+                    break;
+                default:
+                    alert("erro")                   
+            }
+            break;
+        case 2:
+            switch(coluna){
+                case 0:
+                    num = 7
+                    break;
+                case 1:
+                    num = 8
+                    break;
+                case 2:
+                    num = 9
+                    break;
+                default:
+                    alert("erro")
+            }
+            break;
+        default:
+            alert("erro")
+    }
+    let indice = auxiliar.indexOf(num);
+    auxiliar.splice( indice , 1);
+    return;
+}
 
+function estrategia(){
+    let numero = 0;
+    let indice = Math.floor(Math.random() * auxiliar.length);
+    numero = auxiliar[indice]
+    switch(numero){
+        case 1:
+            return [0,0];
+        case 2:
+            return [0,1];
+        case 3:
+            return [0,2];     
+        case 4:
+            return [1,0];
+        case 5:
+            return [1,1];
+        case 6:
+            return [1,2];
+        case 7:
+            return [2,0];
+        case 8:
+            return [2,1];
+        case 9:
+            return [2,2];
+        default:
+            alert("Erro");
+            return [0,0];
+    }
 }
  /*
  //Se fosse um tabela
@@ -254,13 +345,17 @@ function indicarVitoria( jogadorAtual ){
 }
 
 function indicarEmpate(){
-    alert('EMPATE')
+
     let num = Number(contEmpate.innerText);
     contEmpate.innerText = String(++num);
-    reiniciar();
+
+    quemVenceu.innerText = vitorioso + " EMPATOU"
+    telaVitoria.style.display = 'flex';
+    //reiniciar();
 }
 
 function reiniciar(){
+    auxiliar = [1,2,3, 4,5,6, 7,8,9]
     //apaga textos e simbolo de todos os espaços
     for(let i=0 ; i<3; i++){
         for(let j=0 ; j<3; j++){
