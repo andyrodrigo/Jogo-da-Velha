@@ -168,6 +168,15 @@ function inserirXO( linha, coluna){
 
             testarVitoria(simbolo, jogadorAtual)
 
+            //testaEmpate
+            if(jogo){
+                if(simbolos >= 9){
+                    jogo = false;
+                    indicarEmpate();
+                }
+            }
+
+
             //Se for contra a CPU
             if(cpu){
                 jogadaCPU();
@@ -320,9 +329,6 @@ function testarVitoria(simbolo, jogadorAtual){
         }else{
             contadorL=0;
             contadorC=0;
-            if(simbolos == 9){
-                indicarEmpate();
-            }
         }
     }
 }
@@ -341,17 +347,17 @@ function indicarVitoria( jogadorAtual ){
     }
     quemVenceu.innerText = vitorioso + " VENCEU!"
     telaVitoria.style.display = 'flex';
-    //reiniciar();
+
 }
 
 function indicarEmpate(){
 
     let num = Number(contEmpate.innerText);
     contEmpate.innerText = String(++num);
-
-    quemVenceu.innerText = vitorioso + " EMPATOU"
+ 
+    quemVenceu.innerText = "VOCÊ EMPATOU"
     telaVitoria.style.display = 'flex';
-    //reiniciar();
+
 }
 
 function reiniciar(){
