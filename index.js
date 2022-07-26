@@ -1,6 +1,5 @@
-
 //Variáveis------------------------------------------------------------------------------
-//Caixas
+//Caixas, Botões e Textos do Html
 const caixaX = document.getElementById('X')
 const caixaO = document.getElementById('O')
 const vsCPU = document.getElementById('vsCPU')
@@ -25,8 +24,6 @@ const simbX = document.getElementById('simbX')
 const simbO = document.createElement("IMG");
 simbO.src = "imagens/Oo.png";
 
-
-
 //Tabuleiro
 const espaco = new Array(3)
 espaco[0] = new Array(3)
@@ -43,36 +40,26 @@ espaco[2][0] = document.getElementById('2x0');
 espaco[2][1] = document.getElementById('2x1');
 espaco[2][2] = document.getElementById('2x2');
 
-//Array Auxiliar para estrategias da CPU
+//Array Auxiliar para estrategias da CPU (Cada numero corresponde a uma posição do tabuleiro)
 let auxiliar = [1,2,3, 4,5,6, 7,8,9]
-/*
-//Matriz Auxiliar
-const matrizAux = new Array(3)
-matrizAux[0] = new Array(3)
-matrizAux[1] = new Array(3)
-matrizAux[2] = new Array(3)*/
 
-
-//de jogo
+//Respectivas a dados em jogo
 let jogo = false
 let jogador = 1
-let cpu = true;
-let cpuTurno = false;
-let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
-let simbolos = 0;
 let jogador1 = " p1 ";
 let jogador2 = " p2 ";
-
-let testeN = 0;
-
-
-
+let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
+let simbolos = 0;
+let cpu = true;
+let cpuTurno = false;
+let cpuInteligencia = "matador"//"burro"
 
 //Funções-------------------------------------------------------------------------------
 function teste(){
     window.alert('teste')
 }
 
+//Usada para verificar o simbolo escolhido pelo jogador
 function mudaSimbolo( simbolo ){
     if( simbolo == 'X' && simboloJogador != "X"){
         simboloJogador = "X"
@@ -85,6 +72,7 @@ function mudaSimbolo( simbolo ){
     }
 }
 
+//Verifica o modo escolhido pelo jogador ( vs P2 ou vs Cpu)
 function iniciar( modo ){
     limpaTabuleiro()
     ajustaSimbolos()
@@ -122,27 +110,28 @@ function iniciar( modo ){
     telaTabuleiro.style.display = 'block';
     jogo = true
 
+    //Caso a Cpu faça o primeiro lance no inicio
     if(cpu){
         jogadaCPU();
     }
 
 }
 
+//Executa o turno da Cpu
 function jogadaCPU(){
     if(jogo){
         if(cpuTurno){
             cpuTurno = false;
             let area = [ 0, 0];
             area = estrategia()
-            inserirXO( area[0], area[1]);
-            //inserirXO( testeN, testeN);
-            //testeN++;      
+            inserirXO( area[0], area[1]);   
         }else{
             cpuTurno = true;
         } 
     }
 }
 
+//Insere X ou O nos espaços
 function inserirXO( linha, coluna){
     
     if(jogo){
@@ -180,7 +169,6 @@ function inserirXO( linha, coluna){
                 }
             }
 
-
             //Se for contra a CPU
             if(cpu){
                 jogadaCPU();
@@ -189,6 +177,7 @@ function inserirXO( linha, coluna){
     }
 }
 
+//Marca espaços já preenchidos, serve para informar apenas a Cpu
 function retirar( linha, coluna){
     let num;
     switch(linha){
@@ -245,7 +234,17 @@ function retirar( linha, coluna){
     return;
 }
 
+//Verifica a estratégia usada pela inteligencia da Cpu e retorna a linha e coluna que ele vai preencher
 function estrategia(){
+    if(cpuInteligencia == "burro"){
+        return estrategiaAleatoria();
+    }else{
+        return estrategiaMatadora();
+    }
+}
+
+//CPU burro-------------------------------
+function estrategiaAleatoria(){
     let numero = 0;
     let indice = Math.floor(Math.random() * auxiliar.length);
     numero = auxiliar[indice]
@@ -273,33 +272,31 @@ function estrategia(){
             return [0,0];
     }
 }
- /*
- //Se fosse um tabela
-function inserirXO(e){
+//fim de burro----------------------------------------
 
-    let linha = Number(e.currentTarget.parentNode.rowIndex)
-    let coluna = Number(e.currentTarget.cellIndex)
-    let simbolo
-    
-    if(jogador == 1){
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
-        simbolo = 'X'
-        jogador = 2;
-    }else{
-        espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
-        simbolo = 'O' 
-        jogador = 1;
+//Inteligencia matadora----------
+function estrategiaMatadora(){
+    if( jogador1 != "VOCÊ" ){//Cpu é X
+        switch(simbolos){
+            case 0:
+                return jogada1X()
+            case 2:
+                return jogada2X()
+            default:
+                alert("erro na jogada CPU")
+        }
+    }else{//Cpu é O
+        alert("chegou O") 
     }
-    espaco[linha][coluna].innerText = simbolo
-    testarVitoria(simbolo)
-
 }
 
-function inserirSimbolo( ){
+//jogada 1 da CPU matadora para X
+function jogada1X(){
+    return [2,0]
+}
+//fim de matadora----------------------------------
 
-    espaco[0][0].appendChild(simboloX);
-}*/
-
+//Verifica se alguém venceu a cada jogada
 function testarVitoria(simbolo, jogadorAtual){
     
     let contadorL = 0 //conta linha 
@@ -337,6 +334,7 @@ function testarVitoria(simbolo, jogadorAtual){
     }
 }
 
+//Verifica quem venceu para informar e somar no placar
 function indicarVitoria( jogadorAtual ){
     //alert('VITORIA DO JOGADOR ' + jogadorAtual )
     let vitorioso;
@@ -360,9 +358,9 @@ function indicarVitoria( jogadorAtual ){
     ganhouMsg.innerText = "GANHOU A PARTIDA"
     
     telaVitoria.style.display = 'flex';
-
 }
 
+//informa sobre empara e aumenta o placar
 function indicarEmpate(){
 
     let num = Number(contEmpate.innerText);
@@ -377,6 +375,7 @@ function indicarEmpate(){
 
 }
 
+//limpa os dados para reiniciar a partida
 function reiniciar(){
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
     limpaTabuleiro()
@@ -384,7 +383,6 @@ function reiniciar(){
     jogo = true
     telaVitoria.style.display = 'none';
 
-    testeN=0;
     if(cpu){
         if( simboloJogador == "X" ){
             cpuTurno = false; 
@@ -405,6 +403,7 @@ function limpaTabuleiro(){
         }
 }
 
+//garante que o X começa e inica nos simbolos de turno no topo da tela
 function ajustaSimbolos(){
     jogador = 1;
     simbolos = 0;
@@ -413,6 +412,7 @@ function ajustaSimbolos(){
     turno.appendChild(simbX);
 }
 
+//Volta a tela inicial do menu (Usada pelos botões "Voltar" e "Sair")
 function voltar(){
     jogo = false
     //Limpa Tabuleiro
@@ -426,7 +426,6 @@ function voltar(){
     telaTabuleiro.style.display = 'none';
     telaVitoria.style.display = 'none';
     telaInicial.style.display = 'block';
-
 }
 
 
@@ -449,15 +448,7 @@ function escutadores(){
     espaco[2][0].addEventListener('click', function(){inserirXO(2,0)})
     espaco[2][1].addEventListener('click', function(){inserirXO(2,1)})
     espaco[2][2].addEventListener('click', function(){inserirXO(2,2)})
-    /*espaco[0][0].addEventListener('click', inserirXO )
-    espaco[0][1].addEventListener('click', inserirXO)
-    espaco[0][2].addEventListener('click', inserirXO)
-    espaco[1][0].addEventListener('click', inserirXO)
-    espaco[1][1].addEventListener('click', inserirXO)
-    espaco[1][2].addEventListener('click', inserirXO)
-    espaco[2][0].addEventListener('click', inserirXO)
-    espaco[2][1].addEventListener('click', inserirXO)
-    espaco[2][2].addEventListener('click', inserirXO)*/
+
 }
 
 //--------------------------------------------------------------------------------------
