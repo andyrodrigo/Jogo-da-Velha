@@ -86,7 +86,8 @@ function mudaSimbolo( simbolo ){
 }
 
 function iniciar( modo ){
-
+    limpaTabuleiro()
+    ajustaSimbolos()
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
     if( simboloJogador == "X" ){
         jogador1 = "VOCÊ";
@@ -378,18 +379,8 @@ function indicarEmpate(){
 
 function reiniciar(){
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
-    //apaga textos e simbolo de todos os espaços
-    for(let i=0 ; i<3; i++){
-        for(let j=0 ; j<3; j++){
-            espaco[i][j].style.backgroundImage = 'none';
-            espaco[i][j].innerText = "";
-        }
-    }
-    jogador = 1;
-    simbolos = 0;
-    turno.appendChild(simbO);
-    turno.removeChild(simbO);
-    turno.appendChild(simbX);
+    limpaTabuleiro()
+    ajustaSimbolos()
     jogo = true
     telaVitoria.style.display = 'none';
 
@@ -402,6 +393,24 @@ function reiniciar(){
         }
         jogadaCPU();
     }
+}
+
+function limpaTabuleiro(){
+        //apaga textos e simbolo de todos os espaços
+        for(let i=0 ; i<3; i++){
+            for(let j=0 ; j<3; j++){
+                espaco[i][j].style.backgroundImage = 'none';
+                espaco[i][j].innerText = "";
+            }
+        }
+}
+
+function ajustaSimbolos(){
+    jogador = 1;
+    simbolos = 0;
+    turno.appendChild(simbO);
+    turno.removeChild(simbO);
+    turno.appendChild(simbX);
 }
 
 function voltar(){
