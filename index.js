@@ -50,6 +50,7 @@ let jogador1 = " p1 ";
 let jogador2 = " p2 ";
 let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 let simbolos = 0;
+let liberado = true; //libera teclas de inserção
 let cpu = true;
 let cpuTurno = false;
 let cpuInteligencia = "imbativel"//"burro"
@@ -78,8 +79,9 @@ function iniciar( modo ){
     ajustaSimbolos()
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
     if( simboloJogador == "X" ){
+        liberado = true;
         jogador1 = "VOCÊ";
-        if( modo == "cpu"){
+        if( modo == "cpu"){          
             cpu = true;
             cpuTurno = false;
             idP1.innerText = "X (você)";
@@ -92,14 +94,16 @@ function iniciar( modo ){
             jogador2 = "Oponente";
         }     
     }else{
-        jogador2 = "VOCÊ";
+        jogador2 = "VOCÊ";      
         if( modo == "cpu"){
+            liberado = false;
             cpu = true;
             cpuTurno = true;
             idP1.innerText = "O (CPU)";
             idP2.innerText = "X (você)";
             jogador1 = "CPU";
         }else{
+            liberado = true;
             cpu = false;
             idP1.innerText = "X (P2)";
             idP2.innerText = "O (Você)";
@@ -112,7 +116,8 @@ function iniciar( modo ){
 
     //Caso a Cpu faça o primeiro lance no inicio
     if(cpu){
-        jogadaCPU();
+        liberado = false;
+        setTimeout(function(){jogadaCPU()} , 1000);
     }
 
 }
@@ -128,6 +133,13 @@ function jogadaCPU(){
         }else{
             cpuTurno = true;
         } 
+    }
+    liberado = true;
+}
+
+function cliqueEspaco(linha, coluna){
+    if(liberado){
+        inserirXO( linha, coluna)
     }
 }
 
@@ -171,7 +183,8 @@ function inserirXO( linha, coluna){
 
             //Se for contra a CPU
             if(cpu){
-                jogadaCPU();
+                liberado = false;
+                setTimeout(function(){jogadaCPU()} , 1000);
             }
         }
     }
@@ -305,7 +318,9 @@ function indicarVitoria( jogadorAtual ){
     quemVenceu.innerText = vitorioso + " VENCEU!"
     ganhouMsg.innerText = "GANHOU A PARTIDA"
     
-    telaVitoria.style.display = 'flex';
+    //setTimeout(function(){ exibeVitoria()} , 1000);
+    setTimeout(function(){ telaVitoria.style.display = 'flex'} , 1000);
+    //telaVitoria.style.display = 'flex';
 }
 
 //informa sobre empara e aumenta o placar
@@ -319,7 +334,8 @@ function indicarEmpate(){
     quemVenceu.innerText = "VOCÊ EMPATOU"
     ganhouMsg.innerText = "NINGUEM GANHOU A PARTIDA"
     ganhouMsg.style.color = "rgb(168, 190, 201)"
-    telaVitoria.style.display = 'flex';
+    
+    setTimeout(function(){ telaVitoria.style.display = 'flex'} , 1000);
 
 }
 
@@ -333,8 +349,10 @@ function reiniciar(){
 
     if(cpu){
         if( simboloJogador == "X" ){
+            liberado = true;
             cpuTurno = false; 
         }else{
+            liberado = false;
             cpuTurno = true;
         }
         jogadaCPU();
@@ -387,15 +405,15 @@ function escutadores(){
     outra.addEventListener('click', reiniciar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})
-    espaco[0][0].addEventListener('click', function(){inserirXO(0,0)} )
-    espaco[0][1].addEventListener('click', function(){inserirXO(0,1)})
-    espaco[0][2].addEventListener('click', function(){inserirXO(0,2)})
-    espaco[1][0].addEventListener('click', function(){inserirXO(1,0)})
-    espaco[1][1].addEventListener('click', function(){inserirXO(1,1)})
-    espaco[1][2].addEventListener('click', function(){inserirXO(1,2)})
-    espaco[2][0].addEventListener('click', function(){inserirXO(2,0)})
-    espaco[2][1].addEventListener('click', function(){inserirXO(2,1)})
-    espaco[2][2].addEventListener('click', function(){inserirXO(2,2)})
+    espaco[0][0].addEventListener('click', function(){cliqueEspaco(0,0)} )
+    espaco[0][1].addEventListener('click', function(){cliqueEspaco(0,1)})
+    espaco[0][2].addEventListener('click', function(){cliqueEspaco(0,2)})
+    espaco[1][0].addEventListener('click', function(){cliqueEspaco(1,0)})
+    espaco[1][1].addEventListener('click', function(){cliqueEspaco(1,1)})
+    espaco[1][2].addEventListener('click', function(){cliqueEspaco(1,2)})
+    espaco[2][0].addEventListener('click', function(){cliqueEspaco(2,0)})
+    espaco[2][1].addEventListener('click', function(){cliqueEspaco(2,1)})
+    espaco[2][2].addEventListener('click', function(){cliqueEspaco(2,2)})
 
 }
 
