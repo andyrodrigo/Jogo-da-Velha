@@ -52,7 +52,7 @@ let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 let simbolos = 0;
 let cpu = true;
 let cpuTurno = false;
-let cpuInteligencia = "matador"//"burro"
+let cpuInteligencia = "burro"//"burro"
 
 //Funções-------------------------------------------------------------------------------
 function teste(){
@@ -178,59 +178,14 @@ function inserirXO( linha, coluna){
 }
 
 //Marca espaços já preenchidos, serve para informar apenas a Cpu
-function retirar( linha, coluna){
-    let num;
-    switch(linha){
-        case 0:
-            switch(coluna){
-                case 0:
-                    num = 1
-                    break;
-                case 1:
-                    num = 2
-                    break;
-                case 2:
-                    num = 3
-                    break;
-                default:
-                    alert("erro")
-            }
-            break;
-        case 1:
-            switch(coluna){
-                case 0:
-                    num = 4
-                    break;
-                case 1:
-                    num = 5
-                    break;
-                case 2:
-                    num = 6
-                    break;
-                default:
-                    alert("erro")                   
-            }
-            break;
-        case 2:
-            switch(coluna){
-                case 0:
-                    num = 7
-                    break;
-                case 1:
-                    num = 8
-                    break;
-                case 2:
-                    num = 9
-                    break;
-                default:
-                    alert("erro")
-            }
-            break;
-        default:
-            alert("erro")
-    }
-    let indice = auxiliar.indexOf(num);
-    auxiliar.splice( indice , 1);
+function retirar( linha , coluna ){
+
+    let num =  (linha * 3) + (coluna + 1);
+    //Relação desta expressão entrega a posição do elemento:
+    //1,2,3 na linha 0, 4,5,6 na linha 1 e 7,8,9 na linha 2 
+
+    let indice = auxiliar.indexOf(num); //captura o indece da posição do num dentro do vetor
+    auxiliar.splice( indice , 1); //retira 1 item no indice capturado, ou seja, retira o elemento correspondente
     return;
 }
 
@@ -239,7 +194,7 @@ function estrategia(){
     if(cpuInteligencia == "burro"){
         return estrategiaAleatoria();
     }else{
-        return estrategiaMatadora();
+        return estrategiaImbativel();
     }
 }
 
@@ -248,6 +203,7 @@ function estrategiaAleatoria(){
     let numero = 0;
     let indice = Math.floor(Math.random() * auxiliar.length);
     numero = auxiliar[indice]
+    
     switch(numero){
         case 1:
             return [0,0];
@@ -274,8 +230,8 @@ function estrategiaAleatoria(){
 }
 //fim de burro----------------------------------------
 
-//Inteligencia matadora----------
-function estrategiaMatadora(){
+//Inteligencia imbativel----------
+function estrategiaImbativel(){
     if( jogador1 != "VOCÊ" ){//Cpu é X
         switch(simbolos){
             case 0:
@@ -290,10 +246,16 @@ function estrategiaMatadora(){
     }
 }
 
-//jogada 1 da CPU matadora para X
+//jogada 1 da CPU imbativel para X
 function jogada1X(){
     return [2,0]
 }
+//jogada 2 da CPU matadora para X
+function jogada2X(){
+    //Verifica se o jogodor prencheu um dos cantos ao centro
+    return [2,0]
+}
+
 //fim de matadora----------------------------------
 
 //Verifica se alguém venceu a cada jogada
