@@ -52,7 +52,7 @@ let simboloJogador = "X" //iniciamente considera-se que o jogador usa o X
 let simbolos = 0;
 let cpu = true;
 let cpuTurno = false;
-let cpuInteligencia = "burro"//"burro"
+let cpuInteligencia = "imbativel"//"burro"
 
 //Funções-------------------------------------------------------------------------------
 function teste(){
@@ -122,7 +122,7 @@ function jogadaCPU(){
     if(jogo){
         if(cpuTurno){
             cpuTurno = false;
-            let area = [ 0, 0];
+            let area = [0, 0];
             area = estrategia()
             inserirXO( area[0], area[1]);   
         }else{
@@ -200,39 +200,25 @@ function estrategia(){
 
 //CPU burro-------------------------------
 function estrategiaAleatoria(){
-    let numero = 0;
+    //Gera um valor aleatorio de 0 ao tamanho do vetor:
     let indice = Math.floor(Math.random() * auxiliar.length);
-    numero = auxiliar[indice]
+    //Recupera um elemento do vetor auxiliar
+    let numero = auxiliar[indice]
     
-    switch(numero){
-        case 1:
-            return [0,0];
-        case 2:
-            return [0,1];
-        case 3:
-            return [0,2];     
-        case 4:
-            return [1,0];
-        case 5:
-            return [1,1];
-        case 6:
-            return [1,2];
-        case 7:
-            return [2,0];
-        case 8:
-            return [2,1];
-        case 9:
-            return [2,2];
-        default:
-            alert("Erro");
-            return [0,0];
-    }
+    //Recupera a linha e coluna deste elemento:
+    let n = numero - 1
+    let linha = Math.floor( n/3 ) //divisão inteira
+    let coluna = n%3 
+
+    return [linha, coluna];
 }
 //fim de burro----------------------------------------
 
 //Inteligencia imbativel----------
 function estrategiaImbativel(){
     if( jogador1 != "VOCÊ" ){//Cpu é X
+        return estrategiaAleatoria();
+        /*
         switch(simbolos){
             case 0:
                 return jogada1X()
@@ -240,9 +226,9 @@ function estrategiaImbativel(){
                 return jogada2X()
             default:
                 alert("erro na jogada CPU")
-        }
+        }*/
     }else{//Cpu é O
-        alert("chegou O") 
+        return estrategiaAleatoria(); 
     }
 }
 
