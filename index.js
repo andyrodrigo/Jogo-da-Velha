@@ -40,8 +40,11 @@ espaco[2][0] = document.getElementById('2x0');
 espaco[2][1] = document.getElementById('2x1');
 espaco[2][2] = document.getElementById('2x2');
 
-//Array Auxiliar para estrategias da CPU (Cada numero corresponde a uma posição do tabuleiro)
+//Array Auxiliar para estrategias aleatoria da CPU (Cada numero corresponde a uma posição do tabuleiro)
 let auxiliar = [1,2,3, 4,5,6, 7,8,9]
+//Array Auxiliar para estrategia Imbativel da CPU (Registra jogadas)
+let jogadas = [0, 0,0,0,0, 0,0,0,0, 0,0,0,0]
+let indiceDeJogadas = 1;
 
 //Respectivas a dados em jogo
 let jogo = false
@@ -53,12 +56,9 @@ let simbolos = 0;
 let liberado = true; //libera teclas de inserção
 let cpu = true;
 let cpuTurno = false;
-let cpuInteligencia = "imbativel"//"burro"
+let cpuInteligencia = "burro"
 
 //Funções-------------------------------------------------------------------------------
-function teste(){
-    window.alert('teste')
-}
 
 //Usada para verificar o simbolo escolhido pelo jogador
 function mudaSimbolo( simbolo ){
@@ -116,7 +116,6 @@ function iniciar( modo ){
 
     //Caso a Cpu faça o primeiro lance no inicio
     if(cpu){
-        liberado = false;
         setTimeout(function(){jogadaCPU()} , 1000);
     }
 
@@ -169,6 +168,7 @@ function inserirXO( linha, coluna){
                 turno.appendChild(simbX);
             }
             simbolos += 1;
+            registraJogadas( linha, coluna, simbolo )
             espaco[linha][coluna].innerText = simbolo
 
             testarVitoria(simbolo, jogadorAtual)
@@ -188,6 +188,13 @@ function inserirXO( linha, coluna){
             }
         }
     }
+}
+
+function registraJogadas(linha, coluna, simbolo){
+    let num =  (linha * 3) + (coluna + 1);
+    jogadas[indiceDeJogadas] = num
+    //alert(jogadas[indiceDeJogadas])
+    indiceDeJogadas++
 }
 
 //Marca espaços já preenchidos, serve para informar apenas a Cpu
@@ -226,36 +233,6 @@ function estrategiaAleatoria(){
     return [linha, coluna];
 }
 //fim de burro----------------------------------------
-
-//Inteligencia imbativel----------
-function estrategiaImbativel(){
-    if( jogador1 != "VOCÊ" ){//Cpu é X
-        return estrategiaAleatoria();
-        /*
-        switch(simbolos){
-            case 0:
-                return jogada1X()
-            case 2:
-                return jogada2X()
-            default:
-                alert("erro na jogada CPU")
-        }*/
-    }else{//Cpu é O
-        return estrategiaAleatoria(); 
-    }
-}
-
-//jogada 1 da CPU imbativel para X
-function jogada1X(){
-    return [2,0]
-}
-//jogada 2 da CPU matadora para X
-function jogada2X(){
-    //Verifica se o jogodor prencheu um dos cantos ao centro
-    return [2,0]
-}
-
-//fim de matadora----------------------------------
 
 //Verifica se alguém venceu a cada jogada
 function testarVitoria(simbolo, jogadorAtual){
@@ -334,7 +311,7 @@ function indicarEmpate(){
     quemVenceu.innerText = "VOCÊ EMPATOU"
     ganhouMsg.innerText = "NINGUEM GANHOU A PARTIDA"
     ganhouMsg.style.color = "rgb(168, 190, 201)"
-    
+
     setTimeout(function(){ telaVitoria.style.display = 'flex'} , 1000);
 
 }
@@ -367,6 +344,7 @@ function limpaTabuleiro(){
                 espaco[i][j].innerText = "";
             }
         }
+        indiceDeJogadas = 1
 }
 
 //garante que o X começa e inica nos simbolos de turno no topo da tela
@@ -393,6 +371,44 @@ function voltar(){
     telaVitoria.style.display = 'none';
     telaInicial.style.display = 'block';
 }
+
+//Inteligencia imbativel----------
+function estrategiaImbativel(){
+    if( jogador1 != "VOCÊ" ){//Cpu é X
+        //return estrategiaAleatoria();
+        return jogadaImbativelX();
+    }else{//Cpu é O
+        return estrategiaAleatoria(); 
+    }
+}
+
+function jogadaImbativelX(){
+    let area = [0,0]
+    //alert( indiceDeJogadas )
+    switch( indiceDeJogadas ){
+        case 1:
+            area = jogadaX1();
+            break;
+        case 2:
+            area = jogadaX2();
+            break;
+        default:
+            alert("Erro Jogada cpu X");
+    }
+    return area;
+}
+
+//jogada 1 da CPU imbativel para X
+function jogadaX1(){
+    return [2,0];
+}
+//jogada 2 da CPU matadora para X
+function jogadaX2(){
+    //Verifica se o jogador prencheu um dos cantos ao centro
+    return [2,0]
+}
+
+//fim de matadora----------------------------------
 
 
 //Escutadores---------------------------------------------------------------------------
