@@ -373,8 +373,67 @@ function voltar(){
 }
 
 //CPU atenta------------------------------------------
-function Verificar_Fechar(){
-
+function Verificar_Fechar( simboloAtual ){
+    //alert("chegou")
+    let contH =0 , contV = 0, contD1 = 0, contD2  = 0 ;
+    //Procura casas vazias
+    for(let i=0 ; i<3; i++){ // linha
+        for(let j=0 ; j<3; j++){ //coluna
+            if( espaco[i][j].innerText == "" ){
+                //alert( i +"," + j + " está vazio")
+                //verifica linha dele
+                for(let k=0; k<3 ; k++){
+                    if( espaco[i][k].innerText == simboloAtual){
+                        //alert("contH")
+                        contH++
+                    }
+                }
+                //verifica coluna dele
+                for(let k=0; k<3 ; k++){
+                    if( espaco[k][j].innerText == simboloAtual){
+                        contV++
+                    }
+                }
+                //Se ele for de diagonal, verifica também
+                if( (i+j)%2 == 0){ // se asoma de i e j for par, é um elemento que tem diagonal
+                    //alert( i +"," + j + " = " + (i + j))
+                    if( i == j){                    
+                        //alert( "igual a 2")
+                        for(let k=0; k<3 ; k++){
+                            let data = espaco[k][k].innerText
+                            //alert(  data )
+                            if( data  == simboloAtual){
+                                //alert("d1")
+                                contD1++
+                            }
+                        }
+                    }
+                    if( (i + j) == 2 ){         
+                        let z = 2
+                        for(let k=0; k<3 ; k++){                    
+                            let data = espaco[z][k].innerText
+                            if( data == simboloAtual){                   
+                                contD2++
+                            }
+                            //alert(z + "," +k)
+                            z= z-1
+                        }
+                    }
+                }
+                if(contH == 2 || contV == 2 || contD1 == 2 || contD2 == 2 ){
+                    //alert("enviou")
+                    return [i,j];
+                }else{
+                    contH = 0;
+                    contV = 0;
+                    contD1 = 0;
+                    contD2 = 0;
+                }
+            }
+        }
+    }
+    return Verificar_Fechar( 'O' );
+    //return [0,0]
 }
 //FIM de atenta------------------------------------------
 
@@ -402,7 +461,9 @@ function jogadaImbativelX(){
             area = jogadaX3();
             break;
         case 7:
-            area = jogadaX4();
+        case 8:
+        case 9:
+            area = Verificar_Fechar('X');
             break;
         default:
             alert("Erro Jogada cpu X");
@@ -448,7 +509,7 @@ function jogadaX3(){
             if( jogadas[4] == 5){
                 area = [2,2]
             }else{
-                area = [0,0]//finalizar
+                area = Verificar_Fechar('X');
             }
             break;
         case 2:
@@ -456,7 +517,7 @@ function jogadaX3(){
             if( jogadas[4] == 8){
                 area = [1,1]
             }else{
-                area = [0,0]//finalizar
+                area = Verificar_Fechar('X');
             }
             break;
         case 6:
@@ -464,26 +525,38 @@ function jogadaX3(){
             if( jogadas[4] == 4){
                 area = [1,1]
             }else{
-                area = [0,0]//finalizar
+                area = area = Verificar_Fechar('X');
             }
             break;
         case 3:
             if( jogadas[4] == 8){
                 area = [0,0]
             }else{
-                area = [0,0]//finalizar
+                area = area = Verificar_Fechar('X');
             }
             break;
         case 9:
             if( jogadas[4] == 5){
                 area = [0,0]
             }else{
-                area = [0,0]//finalizar
+                area = area = Verificar_Fechar('X');
             }
             break;
         case 5:
-            //a fazer
-            area = [0,0];
+            switch( jogadas[4] ){
+                case 1:
+                    area = [2,2]
+                    break;
+                case 9:
+                    area = [0,0]
+                    break
+                case 2:
+                case 4:
+                case 6:
+                case 8:
+                    area = area = Verificar_Fechar('X'); 
+                    break;
+            }
             break;
         default:
             alert("Erro Jogada2 cpu X");
