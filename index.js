@@ -218,7 +218,7 @@ function estrategia(){
     }
 }
 
-//CPU burro-------------------------------
+//CPU boba-------------------------------
 function estrategiaAleatoria(){
     //Gera um valor aleatorio de 0 ao tamanho do vetor:
     let indice = Math.floor(Math.random() * auxiliar.length);
@@ -232,7 +232,7 @@ function estrategiaAleatoria(){
 
     return [linha, coluna];
 }
-//fim de burro----------------------------------------
+//FIM de boba----------------------------------------
 
 //Verifica se alguém venceu a cada jogada
 function testarVitoria(simbolo, jogadorAtual){
@@ -372,7 +372,13 @@ function voltar(){
     telaInicial.style.display = 'block';
 }
 
-//Inteligencia imbativel----------
+//CPU atenta------------------------------------------
+function Verificar_Fechar(){
+
+}
+//FIM de atenta------------------------------------------
+
+//CPU imbativel---------------------------------------
 function estrategiaImbativel(){
     if( jogador1 != "VOCÊ" ){//Cpu é X
         //return estrategiaAleatoria();
@@ -389,8 +395,14 @@ function jogadaImbativelX(){
         case 1:
             area = jogadaX1();
             break;
-        case 2:
+        case 3:
             area = jogadaX2();
+            break;
+        case 5:
+            area = jogadaX3();
+            break;
+        case 7:
+            area = jogadaX4();
             break;
         default:
             alert("Erro Jogada cpu X");
@@ -404,11 +416,86 @@ function jogadaX1(){
 }
 //jogada 2 da CPU matadora para X
 function jogadaX2(){
-    //Verifica se o jogador prencheu um dos cantos ao centro
-    return [2,0]
+    //Verifica onde o jogador jogou
+    //alert( jogadas[2] )
+    let area = [0,0]
+    switch( jogadas[2] ){
+        case 1:
+        case 5:
+        case 9:
+            area = [0,2];
+            break;
+        case 2:
+        case 3:
+        case 4:
+            area = [2,2];
+            break;
+        case 6:
+        case 8:
+            area = [0,0];
+            break;
+        default:
+            alert("Erro Jogada2 cpu X");
+    }
+    return area;
 }
 
-//fim de matadora----------------------------------
+function jogadaX3(){
+    //alert( jogadas[2] )
+    let area = [0,0]
+    switch( jogadas[2] ){
+        case 1:
+            if( jogadas[4] == 5){
+                area = [2,2]
+            }else{
+                area = [0,0]//finalizar
+            }
+            break;
+        case 2:
+        case 4:
+            if( jogadas[4] == 8){
+                area = [1,1]
+            }else{
+                area = [0,0]//finalizar
+            }
+            break;
+        case 6:
+        case 8:
+            if( jogadas[4] == 4){
+                area = [1,1]
+            }else{
+                area = [0,0]//finalizar
+            }
+            break;
+        case 3:
+            if( jogadas[4] == 8){
+                area = [0,0]
+            }else{
+                area = [0,0]//finalizar
+            }
+            break;
+        case 9:
+            if( jogadas[4] == 5){
+                area = [0,0]
+            }else{
+                area = [0,0]//finalizar
+            }
+            break;
+        case 5:
+            //a fazer
+            area = [0,0];
+            break;
+        default:
+            alert("Erro Jogada2 cpu X");
+    }
+    return area;
+}
+
+function jogadaX4(){
+    return [2,0];
+}
+
+//FIM de imbativel----------------------------------
 
 
 //Escutadores---------------------------------------------------------------------------
