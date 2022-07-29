@@ -56,6 +56,7 @@ let simbolos = 0;
 let liberado = true; //libera teclas de inserção
 let cpu = true;
 let cpuTurno = false;
+let simboloCpu = "O" //iniciamente considera-se que a cpu usa o O
 let cpuInteligencia = "burro"
 
 //Funções-------------------------------------------------------------------------------
@@ -81,7 +82,8 @@ function iniciar( modo ){
     if( simboloJogador == "X" ){
         liberado = true;
         jogador1 = "VOCÊ";
-        if( modo == "cpu"){          
+        if( modo == "cpu"){   
+            simboloCpu = "O"       
             cpu = true;
             cpuTurno = false;
             idP1.innerText = "X (você)";
@@ -96,6 +98,7 @@ function iniciar( modo ){
     }else{
         jogador2 = "VOCÊ";      
         if( modo == "cpu"){
+            simboloCpu = "X"
             liberado = false;
             cpu = true;
             cpuTurno = true;
@@ -432,14 +435,17 @@ function Verificar_Fechar( simboloAtual ){
             }
         }
     }
-    return Verificar_Fechar( 'O' );
-    //return [0,0]
+    if( simboloAtual != simboloJogador){
+        return Verificar_Fechar( simboloJogador );
+    }else{
+        return estrategiaAleatoria();
+    }
 }
 //FIM de atenta------------------------------------------
 
 //CPU imbativel---------------------------------------
 function estrategiaImbativel(){
-    if( jogador1 != "VOCÊ" ){//Cpu é X
+    if( simboloCpu == "X" ){//Cpu é X
         //return estrategiaAleatoria();
         return jogadaImbativelX();
     }else{//Cpu é O
@@ -463,7 +469,7 @@ function jogadaImbativelX(){
         case 7:
         case 8:
         case 9:
-            area = Verificar_Fechar('X');
+            area = Verificar_Fechar(simboloCpu);
             break;
         default:
             alert("Erro Jogada cpu X");
@@ -509,7 +515,7 @@ function jogadaX3(){
             if( jogadas[4] == 5){
                 area = [2,2]
             }else{
-                area = Verificar_Fechar('X');
+                area = Verificar_Fechar(simboloCpu);
             }
             break;
         case 2:
@@ -517,7 +523,7 @@ function jogadaX3(){
             if( jogadas[4] == 8){
                 area = [1,1]
             }else{
-                area = Verificar_Fechar('X');
+                area = Verificar_Fechar(simboloCpu);
             }
             break;
         case 6:
@@ -525,21 +531,21 @@ function jogadaX3(){
             if( jogadas[4] == 4){
                 area = [1,1]
             }else{
-                area = area = Verificar_Fechar('X');
+                area = area = Verificar_Fechar(simboloCpu);
             }
             break;
         case 3:
             if( jogadas[4] == 8){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar('X');
+                area = area = Verificar_Fechar(simboloCpu);
             }
             break;
         case 9:
             if( jogadas[4] == 5){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar('X');
+                area = area = Verificar_Fechar(simboloCpu);
             }
             break;
         case 5:
@@ -554,7 +560,7 @@ function jogadaX3(){
                 case 4:
                 case 6:
                 case 8:
-                    area = area = Verificar_Fechar('X'); 
+                    area = area = Verificar_Fechar(simboloCpu); 
                     break;
             }
             break;
