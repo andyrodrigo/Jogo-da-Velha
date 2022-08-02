@@ -17,13 +17,16 @@ function jogadaCPU(){
 
 //Verifica a estratégia usada pela inteligencia da Cpu e retorna a linha e coluna que ele vai preencher
 function estrategia(){
+    let area = [0,0]
     if( cpuInteligencia == "burro" ){
-        return estrategiaAleatoria();
+        area = estrategiaAleatoria();
     }else if ( cpuInteligencia == "atenta" ){
-        return Trancar_Tentar( simboloJogador, 0);
+        //alert("atenta")
+        area = trancar( simboloJogador );
     }else{
-        return estrategiaImbativel();
+        area = estrategiaImbativel();
     }
+    return area
 }
 
 
@@ -110,9 +113,9 @@ function Verificar_Fechar( simboloAtual ){
     }
 }
 
-function Trancar_Tentar( simboloAtual , quantidade){
+function trancar( simboloAtual ){
     //alert("chegou")
-    let contH = quantidade , contV = quantidade, contD1 = quantidade, contD2  = quantidade ;
+    let contH = 0 , contV = 0, contD1 = 0, contD2  = 0 ;
     //Procura casas vazias
     for(let i=0 ; i<3; i++){ // linha
         for(let j=0 ; j<3; j++){ //coluna
@@ -158,7 +161,7 @@ function Trancar_Tentar( simboloAtual , quantidade){
                     }
                 }
                 if(contH == 2 || contV == 2 || contD1 == 2 || contD2 == 2 ){
-                    //alert("enviou")
+                   // alert("aqui")
                     return [i,j];
                 }else{
                     contH = 0;
@@ -169,23 +172,188 @@ function Trancar_Tentar( simboloAtual , quantidade){
             }
         }
     }
-    if( simboloAtual != simboloCpu){
-        return Trancar_Tentar( simboloCpu , 1 );
-    }else{
-        return estrategiaAleatoria();
+    if(cpuInteligencia == "imbativel"){
+        //alert("se safar")
+        return seSafar(1);
+    } else{
+        return tentar();
     }
+}
+
+function tentar(){
+    //alert("chegou")
+    let contH = 0 , contV = 0, contD1 = 0, contD2  = 0 ;
+    //Procura casas vazias
+    for(let i=0 ; i<3; i++){ // linha
+        for(let j=0 ; j<3; j++){ //coluna
+            if( espaco[i][j].innerText == "" ){
+                //alert( i +"," + j + " está vazio")
+                //verifica linha dele
+                for(let k=0; k<3 ; k++){
+                    if( espaco[i][k].innerText == simboloCpu){
+                        //alert("contH")
+                        contH++
+                    } else if ( espaco[i][k].innerText == simboloJogador){
+                        contH--
+                    }
+                }
+                //verifica coluna dele
+                for(let k=0; k<3 ; k++){
+                    if( espaco[k][j].innerText == simboloCpu){
+                        contV++
+                    } else if ( espaco[k][j].innerText == simboloJogador){
+                        contV--
+                    }
+                }
+                //Se ele for de diagonal, verifica também
+                if( (i+j)%2 == 0){ // se asoma de i e j for par, é um elemento que tem diagonal
+                    //alert( i +"," + j + " = " + (i + j))
+                    if( i == j){                    
+                        //alert( "igual a 2")
+                        for(let k=0; k<3 ; k++){
+                            let data = espaco[k][k].innerText
+                            //alert(  data )
+                            if( data  == simboloCpu){
+                                //alert("d1")
+                                contD1++
+                            } else if ( data == simboloJogador){
+                                contD1--
+                            }
+                        }
+                    }
+                    if( (i + j) == 2 ){         
+                        let z = 2
+                        for(let k=0; k<3 ; k++){                    
+                            let data = espaco[z][k].innerText
+                            if( data == simboloCpu){                   
+                                contD2++
+                            } else if ( data == simboloJogador){
+                                contD2--
+                            }
+                            //alert(z + "," +k)
+                            z= z-1
+                        }
+                    }
+                }
+                if(contH > 0 || contV > 0 || contD1 > 0 || contD2 > 0 ){
+                    //alert("aqui")
+                    return [i,j];
+                }else{
+                    contH = 0;
+                    contV = 0;
+                    contD1 = 0;
+                    contD2 = 0;
+                }
+            }
+        }
+    }
+    return estrategiaAleatoria();
+}
+
+function verifica( i , j , cont){
+    let contH = 0 , contV = 0, contD1 = 0, contD2  = 0 ;
+    for(let k=0; k<3 ; k++){
+        if( espaco[i][k].innerText == simboloCpu){
+            //alert("contH")
+            contH++
+        } else if ( espaco[i][k].innerText == simboloJogador){
+            contH--
+        }
+    }
+    //verifica coluna dele
+    for(let k=0; k<3 ; k++){
+        if( espaco[k][j].innerText == simboloCpu){
+            contV++
+        } else if ( espaco[k][j].innerText == simboloJogador){
+            contV--
+        }
+    }
+    //Se ele for de diagonal, verifica também
+    if( (i+j)%2 == 0){ // se asoma de i e j for par, é um elemento que tem diagonal
+        //alert( i +"," + j + " = " + (i + j))
+        if( i == j){                    
+            //alert( "igual a 2")
+            for(let k=0; k<3 ; k++){
+                let data = espaco[k][k].innerText
+                //alert(  data )
+                if( data  == simboloCpu){
+                    //alert("d1")
+                    contD1++
+                } else if ( data == simboloJogador){
+                    contD1--
+                }
+            }
+        }
+        if( (i + j) == 2 ){         
+            let z = 2
+            for(let k=0; k<3 ; k++){                    
+                let data = espaco[z][k].innerText
+                if( data == simboloCpu){                   
+                    contD2++
+                } else if ( data == simboloJogador){
+                    contD2--
+                }
+                //alert(z + "," +k)
+                z= z-1
+            }
+        }
+    }
+    if(contH > 0 || contV > 0 || contD1 > 0 || contD2 > 0 ){
+        //alert("aqui")
+        return [i,j];
+    }else{
+        //alert("zerou")
+        contH = 0;
+        contV = 0;
+        contD1 = 0;
+        contD2 = 0;
+    }
+    //alert(cont)
+    return seSafar( cont )
+
+}
+
+function seSafar( cont ){
+
+    let data = espaco[0][1]
+    //alert("chegou aqui")
+    if( data.innerText == "" && cont == 1){
+        //alert("tentou 2")
+        cont++;
+        return verifica( 0, 1 ,cont)    
+    }
+    data = espaco[1][0]
+    if( data.innerText == "" && cont == 2){
+        //alert("tentou 4")
+        cont++;
+        return verifica( 1, 0 ,cont)
+    }
+    data = espaco[1][2]
+     if( data.innerText == "" && cont == 3){
+        cont++;
+        return verifica( 1, 2 ,cont)
+    }
+    data = espaco[2][1]
+    if( data.innerText == "" && cont == 4){
+        cont++;
+        return verifica( 2, 1 ,cont)
+    }
+
+    return tentar();
 }
 //FIM de atenta------------------------------------------
 
 //CPU imbativel------------------------------------------
 function estrategiaImbativel(){
+    let area = [0,0]
     if( simboloCpu == "X" ){//Cpu é X
         //return estrategiaAleatoria();
-        return jogadaImbativelX();
+        area = jogadaImbativelX();
     }else{//Cpu é O
-        return jogadaImbativelO();
+        area = jogadaImbativelO();
         //return estrategiaAleatoria(); 
     }
+    return area;
 }
 
 function jogadaImbativelX(){
@@ -286,56 +454,56 @@ function jogadaO2(){
             if( jogadas[3] == 9){
                 area = [0,1]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = trancar(simboloJogador);
             }
             break;
         case 2:
             if( jogadas[3] == 8){
                 area = [0,0]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = area = trancar(simboloJogador);
             }
             break;
         case 3:
             if( jogadas[3] == 7){
                 area = [0,1]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = area = trancar(simboloJogador);
             }
             break;
         case 4:
             if( jogadas[3] == 6){
                 area = [0,0]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = area = trancar(simboloJogador);
             }
             break;
         case 6:
             if( jogadas[3] == 4){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar(simboloCpu);
+                area = area = area = trancar(simboloJogador);
             }
             break;
         case 7:
             if( jogadas[3] == 3){
                 area = [0,1]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = area = trancar(simboloJogador);
             }
             break;
         case 8:
             if( jogadas[3] == 2){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar(simboloCpu);
+                area = area = area = trancar(simboloJogador);
             }
             break;
         case 9:
             if( jogadas[3] == 1){
                 area = [0,1]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = area = trancar(simboloJogador);
             }
             break;
         case 5:
