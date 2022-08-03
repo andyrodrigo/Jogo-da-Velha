@@ -43,8 +43,19 @@ espaco[2][2] = document.getElementById('2x2');
 //Array Auxiliar para estrategias aleatoria da CPU (Cada numero corresponde a uma posição do tabuleiro)
 let auxiliar = [1,2,3, 4,5,6, 7,8,9]
 //Array Auxiliar para estrategia Imbativel da CPU (Registra jogadas)
-let jogadas = [0, 0,0,0,0, 0,0,0,0, 0,0,0,0]
+let jogadas = [0, 0,0,0, 0,0,0, 0,0,0]
 let indiceDeJogadas = 1;
+let jogadasLC = new Array(10)
+jogadasLC[0] = new Array(2)
+jogadasLC[1] = new Array(2)
+jogadasLC[2] = new Array(2)
+jogadasLC[3] = new Array(2)
+jogadasLC[4] = new Array(2)
+jogadasLC[5] = new Array(2)
+jogadasLC[6] = new Array(2)
+jogadasLC[7] = new Array(2)
+jogadasLC[8] = new Array(2)
+jogadasLC[9] = new Array(2)
 
 //Respectivas a dados em jogo
 let jogo = false

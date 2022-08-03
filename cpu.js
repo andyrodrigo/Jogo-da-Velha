@@ -315,16 +315,72 @@ function verifica( i , j , cont){
 
 function seSafar( cont ){
 
-    let data = espaco[0][1]
+    let l=1, c=1, tentativa = 0;
+    
+    switch(cont){
+        case 1:
+            //alert("tentou 1")
+            if(jogadas[1] == 1){
+                l = 2 ; c = 1 ; tentativa = 1
+            }else{
+                l = 0 ; c = 1 ; tentativa = 1
+            }     
+            break;
+        case 2:
+            //alert("tentou 2")
+            l = 1 ; c = 0 ; tentativa = 2
+            break;
+        case 3:
+            //alert("tentou 3")
+            l = 1 ; c = 2 ; tentativa = 3
+            break;
+        case 4:
+            //alert("tentou 4")
+            if(jogadas[1] == 1){
+                l = 0 ; c = 1 ; tentativa = 4
+            }else{
+                l = 2 ; c = 1 ; tentativa = 4
+            } 
+            break;
+    }
+
+    let dado = espaco[l][c];
+    //alert( dado.innerText == "" )
+ 
+    if( dado.innerText == "" && cont == tentativa){
+        cont++;
+        //alert("entrou")
+        return verifica( l, c ,cont)
+    }
+
+    if(tentativa == 0){
+        return tentar();
+    }else{
+        cont++;
+        return seSafar( cont );
+    }
+}
+
+/*
+    if(jogadas[1] == 1){
+        data = espaco[2][1]
+    }else{
+         = espaco[0][1]
+    } 
+    let data = espaco[l][c]
     //alert("chegou aqui")
     if( data.innerText == "" && cont == 1){
-        //alert("tentou 2")
+        alert("tentou 2")
         cont++;
-        return verifica( 0, 1 ,cont)    
+        if(jogadas[1] == 1){
+            return verifica( 2, 1 ,cont)
+        }else{
+            return verifica( 0, 1 ,cont)
+        }      
     }
     data = espaco[1][0]
     if( data.innerText == "" && cont == 2){
-        //alert("tentou 4")
+        alert("tentou 4")
         cont++;
         return verifica( 1, 0 ,cont)
     }
@@ -333,14 +389,22 @@ function seSafar( cont ){
         cont++;
         return verifica( 1, 2 ,cont)
     }
-    data = espaco[2][1]
+    if(jogadas[1] == 1){
+        data = espaco[0][1]
+    }else{
+        data = espaco[2][1]
+    }
     if( data.innerText == "" && cont == 4){
         cont++;
-        return verifica( 2, 1 ,cont)
+        if(jogadas[1] == 1){
+            return verifica( 0, 1 ,cont)
+        }else{
+            return verifica( 2, 1 ,cont)
+        }    
     }
 
     return tentar();
-}
+}*/
 //FIM de atenta------------------------------------------
 
 //CPU imbativel------------------------------------------
@@ -390,8 +454,7 @@ function jogadaImbativelO(){
             area = jogadaO2();
             break;
         case 6:
-            area = Verificar_Fechar(simboloCpu);
-            //area = jogadaO3();
+            area = trancar(simboloJogador);
             break;
         case 8:
         case 9:
@@ -454,6 +517,7 @@ function jogadaO2(){
             if( jogadas[3] == 9){
                 area = [0,1]
             }else{
+                //alert("trancar")
                 area = trancar(simboloJogador);
             }
             break;
@@ -461,65 +525,56 @@ function jogadaO2(){
             if( jogadas[3] == 8){
                 area = [0,0]
             }else{
-                area = area = trancar(simboloJogador);
+                area =trancar(simboloJogador);
             }
             break;
         case 3:
             if( jogadas[3] == 7){
                 area = [0,1]
             }else{
-                area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 4:
             if( jogadas[3] == 6){
                 area = [0,0]
             }else{
-                area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 6:
             if( jogadas[3] == 4){
                 area = [0,0]
             }else{
-                area = area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 7:
             if( jogadas[3] == 3){
                 area = [0,1]
             }else{
-                area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 8:
             if( jogadas[3] == 2){
                 area = [0,0]
             }else{
-                area = area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 9:
             if( jogadas[3] == 1){
                 area = [0,1]
             }else{
-                area = area = trancar(simboloJogador);
+                area = trancar(simboloJogador);
             }
             break;
         case 5:
-            switch( jogadas[3] ){
-                case 1:
-                    area = [2,2]
-                    break;
-                case 9:
-                    area = [0,0]
-                    break
-                case 2:
-                case 4:
-                case 6:
-                case 8:
-                    area = area = Verificar_Fechar(simboloCpu); 
-                    break;
+            if( jogadas[3] == 9){
+                area = [0,2]
+            }else{
+                area = trancar(simboloJogador);
             }
             break;
         default:

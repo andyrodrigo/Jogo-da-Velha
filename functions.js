@@ -118,6 +118,8 @@ function inserirXO( linha, coluna){
 }
 
 function registraJogadas(linha, coluna, simbolo){
+    jogadasLC[indiceDeJogadas][0] = linha
+    jogadasLC[indiceDeJogadas][1] = coluna
     let num =  (linha * 3) + (coluna + 1);
     jogadas[indiceDeJogadas] = num
     //alert(jogadas[indiceDeJogadas])
