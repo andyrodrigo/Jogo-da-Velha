@@ -20,7 +20,8 @@ function jogadaImbativel(){
             area = jogadaX3();
             break;
         case 6:
-            area = trancar(simboloJogador);
+            //area = trancar(simboloJogador);
+            area = possoVencer(simboloCpu);
             break;
         case 7:
         case 8:
@@ -113,7 +114,7 @@ function jogadaO2(){
             if( jogadas[3] == 4){
                 area = [0,0]
             }else{
-                area = trancar(simboloJogador);
+                area = possoVencer(simboloCpu);;
             }
             break;
         case 7:
@@ -127,7 +128,7 @@ function jogadaO2(){
             if( jogadas[3] == 2){
                 area = [0,0]
             }else{
-                area = trancar(simboloJogador);
+                area = possoVencer(simboloCpu);
             }
             break;
         case 9:
@@ -293,7 +294,7 @@ function jogadaO3(){
             }
             break;
         default:
-            alert("Erro Jogada2 cpu X");
+            alert("Erro Jogada2 cpu O");
     }
     return area;
 }
