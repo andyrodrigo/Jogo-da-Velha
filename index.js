@@ -68,7 +68,7 @@ let liberado = true; //libera teclas de inserção
 let cpu = true;
 let cpuTurno = false;
 let simboloCpu = "O" //iniciamente considera-se que a cpu usa o O
-let cpuInteligencia = "burro"//"imbativel"//"atenta"//"burro"
+let cpuInteligencia = "burra"//"imbativel"//"atenta"//"burra"
 
 //Escutadores---------------------------------------------------------------------------
 
