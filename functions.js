@@ -1,5 +1,9 @@
 //Funções-------------------------------------------------------------------------------
 
+function teste(){
+    alert("ok")
+}
+
 //Usada para verificar o simbolo escolhido pelo jogador
 function mudaSimbolo( simbolo ){
     if( simbolo == 'X' && simboloJogador != "X"){
@@ -11,6 +15,36 @@ function mudaSimbolo( simbolo ){
         caixaO.style.backgroundColor = "rgb(128, 150, 161)";
         caixaX.style.backgroundColor = "rgb(25, 42, 50)";
     }
+}
+
+//Ativa tela de seleção de inteligencia
+function exibirInteligencias( exibicao ){
+    //alert(exibicao)
+    if(exibicao){
+        telaCpu.style.display = "flex"
+    }else{
+        telaCpu.style.display = "none"
+    }
+}
+
+//Recebe a opção de inteligencia do botão pressionado
+function selecionarInteligencia( opcao ){
+    alert(opcao)
+    switch(opcao){
+        case 1:
+            cpuInteligencia = "boba";
+            break;
+        case 2:
+            cpuInteligencia = "atenta";
+            break;
+        case 3:
+            cpuInteligencia = "imbativel";
+            break;
+        default:
+            alert("erro na seleção de inteligencia")
+    }
+    telaCpu.style.display = "none"
+    iniciar("cpu")
 }
 
 //Verifica o modo escolhido pelo jogador ( vs P2 ou vs Cpu)
@@ -52,6 +86,7 @@ function iniciar( modo ){
             jogador1 = "Oponente";
         }   
     }
+    mudaTabuleiro()
     telaInicial.style.display = 'none';
     telaTabuleiro.style.display = 'block';
     jogo = true
@@ -225,6 +260,7 @@ function reiniciar(){
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
     limpaTabuleiro()
     ajustaSimbolos()
+    mudaTabuleiro()
     jogo = true
     telaVitoria.style.display = 'none';
 
@@ -260,9 +296,49 @@ function ajustaSimbolos(){
     turno.appendChild(simbX);
 }
 
+//Rearranja a disposição do tabuleiro para trocar as posições de jogada da cpu
+function mudaTabuleiro(){
+    let disposicaoTabuleiro = Math.floor(Math.random() * 4)
+    switch(disposicaoTabuleiro){
+        case 0:
+            tabuleiro.style.flexDirection = "column"
+            linha[0].style.flexDirection = "row"
+            linha[1].style.flexDirection = "row"
+            linha[2].style.flexDirection = "row"
+            break;
+        case 1:
+            tabuleiro.style.flexDirection = "column"
+            linha[0].style.flexDirection = "row-reverse"
+            linha[1].style.flexDirection = "row-reverse"
+            linha[2].style.flexDirection = "row-reverse"
+            break;
+        case 2:
+            tabuleiro.style.flexDirection = "column-reverse"
+            linha[0].style.flexDirection = "row"
+            linha[1].style.flexDirection = "row"
+            linha[2].style.flexDirection = "row"
+            break;
+        case 3:
+            tabuleiro.style.flexDirection = "column-reverse"
+            linha[0].style.flexDirection = "row-reverse"
+            linha[1].style.flexDirection = "row-reverse"
+            linha[2].style.flexDirection = "row-reverse"
+            break;
+        default:
+            alert("erro em geração aleatoria")
+    }
+}
+
+//chama a função voltar e apaga a tela
+function retorno(){
+    jogo = false
+    telaTabuleiro.style.display = 'none';
+    telaVitoria.style.display = 'none';
+    setTimeout(function(){voltar()} , 1000);
+}
+
 //Volta a tela inicial do menu (Usada pelos botões "Voltar" e "Sair")
 function voltar(){
-    jogo = false
     //Limpa Tabuleiro
     reiniciar();
     //Zera Placar
@@ -271,7 +347,6 @@ function voltar(){
     contEmpate.innerText = String(num);
     cont2p.innerText = String(num);
     //Troca de Tela
-    telaTabuleiro.style.display = 'none';
-    telaVitoria.style.display = 'none';
     telaInicial.style.display = 'block';
 }
+

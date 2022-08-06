@@ -30,6 +30,13 @@
     display: none;
 }
 
+#telaCpu{
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
 #telaVitoria{
     display: none;
     background-color: rgb(0, 0, 0, 0.5);
@@ -93,6 +100,7 @@
 
 #vsCPU{
     background-color: rgb(242, 178, 55);
+    box-shadow: 0px 5px rgb(222, 158, 35);
 }
 
 #vsCPU:hover{
@@ -101,6 +109,7 @@
 
 #vsP2{
     background-color: rgb(49, 196, 190);
+    box-shadow: 0px 5px rgb(29, 176, 170);
 }
 
 #vsP2:hover{
@@ -174,12 +183,28 @@
 
 }
 
+#l1{
+    order: 1;
+}
+
 #meio{
+    order: 2;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+#l3{
+    order: 3;
+}
+
 .linha{
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+}
+
+.linhaReversa{
+    flex-direction: row-reverse;
     flex-wrap: nowrap;
     justify-content:space-between;
 }
@@ -245,6 +270,16 @@
     justify-content: space-evenly;
 }
 
+#faixaGrande{
+    background-color: rgb(31, 53, 64);
+    width: 100vw;
+    height: 300px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    color: white;
+}
+
 #msgVitoria1{
     color: white;
     font-size: 20px;
@@ -290,3 +325,46 @@
 #outra:hover{
     background-color: rgb(255, 208, 85);
 }
+
+#opcoesInteligencia{
+    display: flex;
+    flex-direction: column;
+}
+
+#boba{
+    background-color: rgb(168, 190, 201);
+    box-shadow: 0px 5px rgb(148, 170, 181); 
+}
+
+#boba:hover{
+    background-color: rgb(198, 210, 231);
+}
+
+#atenta{
+    background-color: rgb(242, 178, 55);
+    box-shadow: 0px 5px rgb(222, 158, 35);
+}
+
+#atenta:hover{
+    background-color: rgb(255, 208, 95);
+}
+
+#imbativel{
+    background-color: rgb(49, 196, 190);
+    box-shadow: 0px 5px rgb(29, 176, 170);
+}
+
+#imbativel:hover{
+    background-color: rgb(79, 226, 220);
+}
+
+#cancela{
+    background-color: rgb(25, 42, 50);
+}
+
+#cancela:hover{
+    background-color: rgb(55, 72, 80);
+}
+
+
+

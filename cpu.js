@@ -18,13 +18,11 @@ function jogadaCPU(){
 //Verifica a estratégia usada pela inteligencia da Cpu e retorna a linha e coluna que ele vai preencher
 function estrategia(){
     let area = [0,0]
-    if( cpuInteligencia == "burra" ){
+    if( cpuInteligencia == "boba" ){
         area = estrategiaAleatoria();
     }else if ( cpuInteligencia == "atenta" ){
         //alert("atenta")
         area = jogadaAtenta();
-    }else if ( cpuInteligencia == "desafiadora" ){
-        area = jogadaDesafiadora();
     } else{
         area = jogadaImbativel();
     }

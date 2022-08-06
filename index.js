@@ -1,5 +1,7 @@
 //Variáveis------------------------------------------------------------------------------
 //Caixas, Botões e Textos do Html
+const tabuleiro = document.getElementById('tabuleiro')
+const linha = document.getElementsByClassName('linha')
 const caixaX = document.getElementById('X')
 const caixaO = document.getElementById('O')
 const vsCPU = document.getElementById('vsCPU')
@@ -7,6 +9,11 @@ const vsP2 = document.getElementById('vsP2')
 const telaInicial = document.getElementById('telaInicial')
 const telaTabuleiro = document.getElementById('telaTabuleiro')
 const telaVitoria = document.getElementById('telaVitoria')
+const telaCpu = document.getElementById('telaCpu')
+const boba = document.getElementById('boba')
+const atenta = document.getElementById('atenta')
+const imbativel = document.getElementById('imbativel')
+const cancela = document.getElementById('cancela')
 const vitoriaX = document.getElementById('vitoriaX')
 const vitoriaO = document.getElementById('vitoriaO')
 const ganhouMsg = document.getElementById('ganhouMsg')
@@ -68,15 +75,21 @@ let liberado = true; //libera teclas de inserção
 let cpu = true;
 let cpuTurno = false;
 let simboloCpu = "O" //iniciamente considera-se que a cpu usa o O
-let cpuInteligencia = "atenta"//"imbativel"//"atenta"//"burra"
+let cpuInteligencia = "outra"//"imbativel"//"atenta"//"boba"
 
 //Escutadores---------------------------------------------------------------------------
 
 function escutadores(){
-    vsCPU.addEventListener('click', function(){iniciar("cpu")})
+    vsCPU.addEventListener('click', function(){exibirInteligencias(true)})
+    cancela.addEventListener('click', function(){exibirInteligencias(false)})
+    boba.addEventListener('click', function(){selecionarInteligencia(1)})
+    atenta.addEventListener('click', function(){selecionarInteligencia(2)})
+    imbativel.addEventListener('click', function(){selecionarInteligencia(3)})
+
+    //vsCPU.addEventListener('click', function(){iniciar("cpu")})
     vsP2.addEventListener('click', function(){iniciar("p2")} )
-    volta.addEventListener('click', voltar)
-    sair.addEventListener('click', voltar)
+    volta.addEventListener('click', retorno)
+    sair.addEventListener('click', retorno)
     outra.addEventListener('click', reiniciar)
     caixaX.addEventListener('click', function(){mudaSimbolo("X")})
     caixaO.addEventListener('click', function(){mudaSimbolo("O")})

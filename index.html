@@ -45,6 +45,20 @@
             </button>
         </div>
 
+        <div id="telaCpu" class="flex">
+
+            <div id="faixaGrande" class="flex">
+                <div id="opcoesInteligencia" class="flex">
+                    <p>SELECIONE A INTELIGÊNCIA DA CPU</p>
+                    <button id="boba" class="janela opcao" >BOBA</button> 
+                    <button id="atenta" class="janela opcao" >ATENTA</button>
+                    <button id="imbativel" class="janela opcao" >IMBATÍVEL</button>  
+                    <button id="cancela" class="janela opcao" >cancelar</button> 
+                </div>
+            </div>
+
+        </div>
+
         <div id="telaVitoria" class="flex">
 
             <div id="faixa" class="flex">
@@ -86,20 +100,20 @@
                 </div>
 
                 <div id="tabuleiro" class="flex">
-                    <div class="linha flex">
-                        <div class="espaco flex" id="0x0"></div>
-                        <div class="espaco flex" id="0x1"></div>
-                        <div class="espaco flex" id="0x2"></div>
+                    <div id="l1" class="linha flex">
+                        <div class="espaco flex" id="0x0">00</div>
+                        <div class="espaco flex" id="0x1">01</div>
+                        <div class="espaco flex" id="0x2">02</div>
                     </div>
                     <div id="meio" class="linha flex">
-                        <div class="espaco flex" id="1x0"></div>
-                        <div class="espaco flex" id="1x1"></div>
-                        <div class="espaco flex" id="1x2"></div>
+                        <div class="espaco flex" id="1x0">10</div>
+                        <div class="espaco flex" id="1x1">11</div>
+                        <div class="espaco flex" id="1x2">12</div>
                     </div>
-                    <div class="linha flex">
-                        <div class="espaco flex" id="2x0"></div>
-                        <div class="espaco flex" id="2x1"></div>
-                        <div class="espaco flex" id="2x2"></div>
+                    <div id="l3" class="linha flex">
+                        <div class="espaco flex" id="2x0">20</div>
+                        <div class="espaco flex" id="2x1">21</div>
+                        <div class="espaco flex" id="2x2">22</div>
                     </div>
                 </div>
 
@@ -126,7 +140,6 @@
 <script src="functions.js"></script>
 <script src="cpu.js"></script>
 <script src="cpuAtenta.js"></script>
-<script src="cpuDesafiadora.js"></script>
 <script src="cpuImbativel.js"></script>
 
 </html>
