@@ -17,11 +17,17 @@ apenas vi como eram as imagens e as cores e fiz.
 
 ## Descrição do projeto:
 
-> O usuário seleciona o modo de jogo e poder jogar o jogo da velha com alguém que esteja com ele ou contra a cpu.
+> O usuário seleciona o modo de jogo e pode jogar o jogo da velha com alguém que esteja com ele ou contra a cpu.
 > O jogo foi feito com responsividade, perfeito para ser jogado na tela do celular.
 
-> O projeto conta com 3 telas:
+> Este jogo implementa 3 dificuldades para a cpu: Boba, Atenta e Imbatível.
+> - A **Boba** faz a jogada da cpu ser aleatória. Ela analisa apenas se o espaço está vazio para poder jogar.
+> - A **Atenta** tenta fechar a linha e impedir o jogador de ganhar.
+> - A **Imbatível** conhece todas as jogadas possíveis para a vitória, por isso, ela força um empate se não puder vencer. Como o próprio nome diz, ela não pode ser vencida, fazendo com que o jogador teste suas habilidades para não ser derrotado e sempre buscar pelo menos um empate.
+
+> O projeto conta com 4 telas:
 > - A tela inicial de opções para começar o Jogo.
+> - A tela de seleção de inteligência da Cpu.
 > - A tela com o tabuleiro do jogo para jogar.
 > - A tela de vitória para indicar o vencedor.
 
@@ -30,6 +36,11 @@ apenas vi como eram as imagens e as cores e fiz.
 > Então, Escolhe se jogará com um segundop jogador ou contra a Cpu.
 
 <img src="/imagens/TelaInicial.png"/>
+
+> ### Tela Seleção de Inteligência:
+> O usuário pode selecionar o nível de inteligência da Cpu que vai enfrentar ou cancelar a opção.
+
+<img src="/imagens/TelaCpu.png"/>
 
 > ### Tela de Jogo:
 > Nesta tela, o jogador escolhe qual espaço preencherá com seu símbolo em seu devido turno.
@@ -46,13 +57,19 @@ apenas vi como eram as imagens e as cores e fiz.
 
 ## Recursos:
 
-> Este jogo ainda esta em desenvolvimento, a ideia é trazer 3 dificuldades para a cpu:
-> Boba, Atenta e Imbatível.
-> A boba já está implementada, que seria fazer a jogada da cpu ser aleatória. A Atenta tenta fechar a linha e impedir o jogador de ganhar. Já a imbatível,
-como o próprio nome diz, não pode ser vencida, fazendo com o jogador teste suas habilidades para não ser derrotado e sempre forçar um empate.
+* [X] Tela de opções iniciais do jogo
+* [X] Tela de seleção da inteligência da CPU
+* [X] Tela de Vitória, Derrota ou Empate
+* [X] Tela com o tabuleiro do jogo
+* [X] Layout Responsivo
+* [X] Seleção de símbolos
+* [X] Modos de jogo
+* [X] Controles de retorno
+* [X] Funções das telas
+* [X] Placar e Turnos
+* [X] Funções da Cpu
+* [X] Jogadas da Cpu Atenta
+* [X] Jogadas da Cpu Imbatível
 
-* [X] Cpu Boba.
-* [ ] Cpu Atenta.
-* [ ] Cpu Imbatível.
 
 
