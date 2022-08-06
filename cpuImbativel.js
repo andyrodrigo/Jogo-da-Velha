@@ -20,13 +20,10 @@ function jogadaImbativel(){
             area = jogadaX3();
             break;
         case 6:
-            //area = trancar(simboloJogador);
-            area = possoVencer(simboloCpu);
-            break;
         case 7:
         case 8:
         case 9:
-            area = Verificar_Fechar(simboloCpu);
+            area = verificarFechar(simboloCpu);
             break;
         default:
             alert("Erro Jogada cpu Imbativel");
@@ -114,7 +111,7 @@ function jogadaO2(){
             if( jogadas[3] == 4){
                 area = [0,0]
             }else{
-                area = possoVencer(simboloCpu);;
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 7:
@@ -128,7 +125,7 @@ function jogadaO2(){
             if( jogadas[3] == 2){
                 area = [0,0]
             }else{
-                area = possoVencer(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 9:
@@ -159,7 +156,7 @@ function jogadaX3(){
             if( jogadas[4] == 5){
                 area = [2,2]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 2:
@@ -167,7 +164,7 @@ function jogadaX3(){
             if( jogadas[4] == 8){
                 area = [1,1]
             }else{
-                area = Verificar_Fechar(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 6:
@@ -175,21 +172,21 @@ function jogadaX3(){
             if( jogadas[4] == 4){
                 area = [1,1]
             }else{
-                area = area = Verificar_Fechar(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 3:
             if( jogadas[4] == 8){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 9:
             if( jogadas[4] == 5){
                 area = [0,0]
             }else{
-                area = area = Verificar_Fechar(simboloCpu);
+                area = verificarFechar(simboloCpu)
             }
             break;
         case 5:
@@ -204,7 +201,7 @@ function jogadaX3(){
                 case 4:
                 case 6:
                 case 8:
-                    area = area = Verificar_Fechar(simboloCpu); 
+                    area = verificarFechar(simboloCpu) 
                     break;
             }
             break;
@@ -213,150 +210,3 @@ function jogadaX3(){
     }
     return area;
 }
-
-//jogada 3 da CPU imbativel para O
-function jogadaO3(){
-    //Verifica onde o jogador jogou
-    //alert( jogadas[2] )
-    let area = [0,0]
-
-    switch( jogadas[1] ){
-        case 1:
-            if( jogadas[3] == 9){
-                area = [0,1]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 2:
-            if( jogadas[3] == 8){
-                area = [0,0]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 3:
-            if( jogadas[3] == 7){
-                area = [0,1]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 4:
-            if( jogadas[3] == 6){
-                area = [0,0]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 6:
-            if( jogadas[3] == 4){
-                area = [0,0]
-            }else{
-                area = area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 7:
-            if( jogadas[3] == 3){
-                area = [0,1]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 8:
-            if( jogadas[3] == 2){
-                area = [0,0]
-            }else{
-                area = area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 9:
-            if( jogadas[3] == 1){
-                area = [0,1]
-            }else{
-                area = Verificar_Fechar(simboloCpu);
-            }
-            break;
-        case 5:
-            switch( jogadas[3] ){
-                case 1:
-                    area = [2,2]
-                    break;
-                case 9:
-                    area = [0,0]
-                    break
-                case 2:
-                case 4:
-                case 6:
-                case 8:
-                    area = area = Verificar_Fechar(simboloCpu); 
-                    break;
-            }
-            break;
-        default:
-            alert("Erro Jogada2 cpu O");
-    }
-    return area;
-}
-
-/*
-
-function estrategiaImbativel(){
-    let area = [0,0]
-    if( simboloCpu == "X" ){//Cpu é X
-        //return estrategiaAleatoria();
-        area = jogadaImbativelX();
-    }else{//Cpu é O
-        area = jogadaImbativelO();
-        //return estrategiaAleatoria(); 
-    }
-    return area;
-}
-
-
-
-function jogadaImbativelX(){
-    let area = [0,0]
-    //alert( indiceDeJogadas )
-    switch( indiceDeJogadas ){
-        case 1:
-            area = jogadaX1();
-            break;
-        case 3:
-            area = jogadaX2();
-            break;
-        case 5:
-            area = jogadaX3();
-            break;
-        case 7:
-        case 9:
-            area = Verificar_Fechar(simboloCpu);
-            break;
-        default:
-            alert("Erro Jogada cpu X");
-    }
-    return area;
-}
-
-function jogadaImbativelO(){
-    let area = [0,0]
-    //alert( indiceDeJogadas )
-    switch( indiceDeJogadas ){
-        case 2:
-            area = jogadaO1();
-            break;
-        case 4:
-            area = jogadaO2();
-            break;
-        case 6:
-            area = trancar(simboloJogador);
-            break;
-        case 8:
-        case 9:
-            area = Verificar_Fechar(simboloCpu);
-            break;
-        default:
-            alert("Erro Jogada cpu X");
-    }
-    return area;
-}*/
