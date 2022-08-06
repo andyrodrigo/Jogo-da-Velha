@@ -1,4 +1,4 @@
-//Funções Comuns da cpu
+//Funções Comuns da cpu--------------------------------------------------
 
 //Executa o turno da Cpu
 function jogadaCPU(){
@@ -17,20 +17,18 @@ function jogadaCPU(){
 
 //Verifica a estratégia usada pela inteligencia da Cpu e retorna a linha e coluna que ele vai preencher
 function estrategia(){
-    let area = [0,0]
     if( cpuInteligencia == "boba" ){
-        area = estrategiaAleatoria();
+        return estrategiaAleatoria();
     }else if ( cpuInteligencia == "atenta" ){
-        //alert("atenta")
-        area = jogadaAtenta();
+        return jogadaAtenta();
     } else{
-        area = jogadaImbativel();
+        return jogadaImbativel();
     }
-    return area
 }
 
+//apenas preenche um espaço que esteja vazio aleatoriamente
 function estrategiaAleatoria(){
-    //Gera um valor aleatorio de 0 ao tamanho do vetor:
+    //Gera um valor aleatorio de 0 até o tamanho do vetor:
     let indice = Math.floor(Math.random() * auxiliar.length);
     //Recupera um elemento do vetor auxiliar
     let numero = auxiliar[indice]
@@ -45,17 +43,17 @@ function estrategiaAleatoria(){
 
 //Analisa se tem 2 simbolos iguais que fecham uma linha
 function verificarFechar( simboloAtual ){
-    //alert("chegou")
+
     let contH =0 , contV = 0, contD1 = 0, contD2  = 0 ;
+
     //Procura casas vazias
     for(let i=0 ; i<3; i++){ // linha
         for(let j=0 ; j<3; j++){ //coluna
             if( espaco[i][j].innerText == "" ){
-                //alert( i +"," + j + " está vazio")
+
                 //verifica linha dele
                 for(let k=0; k<3 ; k++){
                     if( espaco[i][k].innerText == simboloAtual){
-                        //alert("contH")
                         contH++
                     }
                 }
@@ -66,15 +64,11 @@ function verificarFechar( simboloAtual ){
                     }
                 }
                 //Se ele for de diagonal, verifica também
-                if( (i+j)%2 == 0){ // se asoma de i e j for par, é um elemento que tem diagonal
-                    //alert( i +"," + j + " = " + (i + j))
+                if( (i+j)%2 == 0){ // se a soma de i e j for par, é um elemento que tem diagonal
                     if( i == j){                    
-                        //alert( "igual a 2")
                         for(let k=0; k<3 ; k++){
                             let data = espaco[k][k].innerText
-                            //alert(  data )
                             if( data  == simboloAtual){
-                                //alert("d1")
                                 contD1++
                             }
                         }
@@ -86,13 +80,11 @@ function verificarFechar( simboloAtual ){
                             if( data == simboloAtual){                   
                                 contD2++
                             }
-                            //alert(z + "," +k)
                             z= z-1
                         }
                     }
                 }
                 if(contH == 2 || contV == 2 || contD1 == 2 || contD2 == 2 ){
-                    //alert("enviou")
                     return [i,j];
                 }else{
                     contH = 0;
@@ -103,11 +95,12 @@ function verificarFechar( simboloAtual ){
             }
         }
     }
-
+    //Se não pode vencer nessa jogada, analisa se o oponente pode
     if( simboloAtual == simboloCpu ){
         return verificarFechar( simboloJogador );
     }else{
         if(simboloCpu == "O"){
+            //verifica jogada capciosa se for o segundo a jogar
             return temDuploX();
         }else{
             return estrategiaAleatoria();
@@ -117,7 +110,6 @@ function verificarFechar( simboloAtual ){
 
 //Analisa se o adversario fez uma jogada de 2 X com uma casa vazia entre eles e fecha isso
 function temDuploX(){
-    //caso1
     let dado = espaco[0][0];
     let casa1 = espaco[0][1];
     let casa2 = espaco[1][0];
@@ -150,7 +142,6 @@ function seSafar( cont ){
     
     switch(cont){
         case 1:
-            //alert("tentou 1")
             if(jogadas[1] == 1){
                 l = 2 ; c = 1 ; tentativa = 1
             }else{
@@ -158,15 +149,12 @@ function seSafar( cont ){
             }     
             break;
         case 2:
-            //alert("tentou 2")
             l = 1 ; c = 0 ; tentativa = 2
             break;
         case 3:
-            //alert("tentou 3")
             l = 1 ; c = 2 ; tentativa = 3
             break;
         case 4:
-            //alert("tentou 4")
             if(jogadas[1] == 1){
                 l = 0 ; c = 1 ; tentativa = 4
             }else{
@@ -176,11 +164,9 @@ function seSafar( cont ){
     }
 
     let dado = espaco[l][c];
-    //alert( dado.innerText == "" )
- 
+
     if( dado.innerText == "" && cont == tentativa){
         cont++;
-        //alert("entrou")
         return verifica( l, c ,cont)
     }
 
@@ -197,7 +183,6 @@ function verifica( i , j , cont){
     let contH = 0 , contV = 0, contD1 = 0, contD2  = 0 ;
     for(let k=0; k<3 ; k++){
         if( espaco[i][k].innerText == simboloCpu){
-            //alert("contH")
             contH++
         } else if ( espaco[i][k].innerText == simboloJogador){
             contH--
@@ -213,14 +198,10 @@ function verifica( i , j , cont){
     }
     //Se ele for de diagonal, verifica também
     if( (i+j)%2 == 0){ // se asoma de i e j for par, é um elemento que tem diagonal
-        //alert( i +"," + j + " = " + (i + j))
         if( i == j){                    
-            //alert( "igual a 2")
             for(let k=0; k<3 ; k++){
                 let data = espaco[k][k].innerText
-                //alert(  data )
                 if( data  == simboloCpu){
-                    //alert("d1")
                     contD1++
                 } else if ( data == simboloJogador){
                     contD1--
@@ -236,21 +217,18 @@ function verifica( i , j , cont){
                 } else if ( data == simboloJogador){
                     contD2--
                 }
-                //alert(z + "," +k)
                 z= z-1
             }
         }
     }
     if(contH > 0 || contV > 0 || contD1 > 0 || contD2 > 0 ){
-        //alert("aqui")
         return [i,j];
     }else{
-        //alert("zerou")
         contH = 0;
         contV = 0;
         contD1 = 0;
         contD2 = 0;
     }
-    //alert(cont)
+    //testa a próxima situação
     return seSafar( cont )
 }

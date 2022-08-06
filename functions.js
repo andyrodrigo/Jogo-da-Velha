@@ -1,8 +1,4 @@
-//Funções-------------------------------------------------------------------------------
-
-function teste(){
-    alert("ok")
-}
+//Funções das Telas-------------------------------------------------------------------------------
 
 //Usada para verificar o simbolo escolhido pelo jogador
 function mudaSimbolo( simbolo ){
@@ -19,7 +15,6 @@ function mudaSimbolo( simbolo ){
 
 //Ativa tela de seleção de inteligencia
 function exibirInteligencias( exibicao ){
-    //alert(exibicao)
     if(exibicao){
         telaCpu.style.display = "flex"
     }else{
@@ -29,7 +24,6 @@ function exibirInteligencias( exibicao ){
 
 //Recebe a opção de inteligencia do botão pressionado
 function selecionarInteligencia( opcao ){
-    alert(opcao)
     switch(opcao){
         case 1:
             cpuInteligencia = "boba";
@@ -49,9 +43,12 @@ function selecionarInteligencia( opcao ){
 
 //Verifica o modo escolhido pelo jogador ( vs P2 ou vs Cpu)
 function iniciar( modo ){
+
     limpaTabuleiro()
     ajustaSimbolos()
+    //garante todos os espaços como existentes no vetor
     auxiliar = [1,2,3, 4,5,6, 7,8,9]
+
     if( simboloJogador == "X" ){
         liberado = true;
         jogador1 = "VOCÊ";
@@ -75,8 +72,8 @@ function iniciar( modo ){
             liberado = false;
             cpu = true;
             cpuTurno = true;
-            idP1.innerText = "O (CPU)";
-            idP2.innerText = "X (você)";
+            idP1.innerText = "X (CPU)";
+            idP2.innerText = "O (você)";
             jogador1 = "CPU";
         }else{
             liberado = true;
@@ -86,9 +83,12 @@ function iniciar( modo ){
             jogador1 = "Oponente";
         }   
     }
+
     mudaTabuleiro()
+
     telaInicial.style.display = 'none';
     telaTabuleiro.style.display = 'block';
+
     jogo = true
 
     //Caso a Cpu faça o primeiro lance no inicio
@@ -98,6 +98,7 @@ function iniciar( modo ){
 
 }
 
+//Espera liberação entre jogadas para o clique nos espaços
 function cliqueEspaco(linha, coluna){
     if(liberado){
         inserirXO( linha, coluna)
@@ -130,7 +131,7 @@ function inserirXO( linha, coluna){
                 turno.appendChild(simbX);
             }
             simbolos += 1;
-            registraJogadas( linha, coluna, simbolo )
+            registraJogadas( linha, coluna )
             espaco[linha][coluna].innerText = simbolo
 
             testarVitoria(simbolo, jogadorAtual)
@@ -152,12 +153,9 @@ function inserirXO( linha, coluna){
     }
 }
 
-function registraJogadas(linha, coluna, simbolo){
-    jogadasLC[indiceDeJogadas][0] = linha
-    jogadasLC[indiceDeJogadas][1] = coluna
+function registraJogadas(linha, coluna ){
     let num =  (linha * 3) + (coluna + 1);
     jogadas[indiceDeJogadas] = num
-    //alert(jogadas[indiceDeJogadas])
     indiceDeJogadas++
 }
 
@@ -168,7 +166,7 @@ function retirar( linha , coluna ){
     //Relação desta expressão entrega a posição do elemento:
     //1,2,3 na linha 0, 4,5,6 na linha 1 e 7,8,9 na linha 2 
 
-    let indice = auxiliar.indexOf(num); //captura o indece da posição do num dentro do vetor
+    let indice = auxiliar.indexOf(num); //captura o indice da posição do num dentro do vetor
     auxiliar.splice( indice , 1); //retira 1 item no indice capturado, ou seja, retira o elemento correspondente
     return;
 }
@@ -213,7 +211,7 @@ function testarVitoria(simbolo, jogadorAtual){
 
 //Verifica quem venceu para informar e somar no placar
 function indicarVitoria( jogadorAtual ){
-    //alert('VITORIA DO JOGADOR ' + jogadorAtual )
+
     let vitorioso;
     if( jogadorAtual == 1){
         vitorioso = jogador1
@@ -234,9 +232,7 @@ function indicarVitoria( jogadorAtual ){
     quemVenceu.innerText = vitorioso + " VENCEU!"
     ganhouMsg.innerText = "GANHOU A PARTIDA"
     
-    //setTimeout(function(){ exibeVitoria()} , 1000);
     setTimeout(function(){ telaVitoria.style.display = 'flex'} , 1000);
-    //telaVitoria.style.display = 'flex';
 }
 
 //informa sobre empate e aumenta o placar
@@ -252,7 +248,6 @@ function indicarEmpate(){
     ganhouMsg.style.color = "rgb(168, 190, 201)"
 
     setTimeout(function(){ telaVitoria.style.display = 'flex'} , 1000);
-
 }
 
 //limpa os dados para reiniciar a partida
@@ -272,7 +267,7 @@ function reiniciar(){
             liberado = false;
             cpuTurno = true;
         }
-        jogadaCPU();
+        setTimeout(function(){jogadaCPU()} , 1000);
     }
 }
 
@@ -339,14 +334,13 @@ function retorno(){
 
 //Volta a tela inicial do menu (Usada pelos botões "Voltar" e "Sair")
 function voltar(){
-    //Limpa Tabuleiro
-    reiniciar();
     //Zera Placar
     let num = Number(0);
     cont1p.innerText = String(num);
     contEmpate.innerText = String(num);
     cont2p.innerText = String(num);
     //Troca de Tela
+    telaVitoria.style.display = 'none';
     telaInicial.style.display = 'block';
 }
 

@@ -2,13 +2,10 @@
 
 function jogadaImbativel(){
     let area = [0,0]
-    //alert( indiceDeJogadas )
     switch( indiceDeJogadas ){
         case 1:
-            area = jogadaX1();
-            break;
         case 2:
-            area = jogadaO1();
+            area = jogada1();
             break;
         case 3:
             area = jogadaX2();
@@ -17,7 +14,7 @@ function jogadaImbativel(){
             area = jogadaO2();
             break;
         case 5:
-            area = jogadaX3();
+            area = jogada3();
             break;
         case 6:
         case 7:
@@ -31,24 +28,23 @@ function jogadaImbativel(){
     return area;
 }
 
-//jogada 1 da CPU imbativel para X
-function jogadaX1(){
-    return [2,0];
-}
-
-//jogada 1 da CPU imbativel para O
-function jogadaO1(){
-    if( jogadas[1] == 5 ){
-        return [0,0];
+//jogada 1 da CPU imbativel
+function jogada1(){
+    if(simboloCpu == "X"){
+        return [2,0];
     }else{
-        return [1,1];
+        if( jogadas[1] == 5 ){
+            return [0,0];
+        }else{
+            return [1,1];
+        }
     }
+    
 }
 
 //jogada 2 da CPU imbativel para X
 function jogadaX2(){
     //Verifica onde o jogador jogou
-    //alert( jogadas[2] )
     let area = [0,0]
     switch( jogadas[2] ){
         case 1:
@@ -74,7 +70,6 @@ function jogadaX2(){
 //jogada 2 da CPU imbativel para O
 function jogadaO2(){
     //Verifica onde o jogador jogou
-    //alert( jogadas[2] )
     let area = [0,0]
 
     switch( jogadas[1] ){
@@ -82,7 +77,6 @@ function jogadaO2(){
             if( jogadas[3] == 9){
                 area = [0,1]
             }else{
-                //alert("trancar")
                 area = trancar(simboloJogador);
             }
             break;
@@ -148,8 +142,7 @@ function jogadaO2(){
     return area;
 }
 
-function jogadaX3(){
-    //alert( jogadas[2] )
+function jogada3(){
     let area = [0,0]
     switch( jogadas[2] ){
         case 1:
