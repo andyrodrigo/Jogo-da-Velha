@@ -1,0 +1,16 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="Frame 2" clip-path="url(#clip0_7_23)">
+        <rect width="500" height="500" fill="white"/>
+        <path class="X" d="M291 199V1H243.5H196V199H1V297H196V499H291V297H498V199H291Z" stroke="#00C5BF" stroke-width="5"/>
+        <g id="Frame">
+        <path class="X1" d="M244 1V499" stroke="#00C5BF" stroke-width="100"/>
+        <path class="X1" d="M2 250H497" stroke="#00C5BF" stroke-width="100"/>
+        </g>
+        </g>
+        <defs>
+        <clipPath id="clip0_7_23">
+        <rect width="500" height="500" fill="white"/>
+        </clipPath>
+        </defs>
+        </svg>
+        
