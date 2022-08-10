@@ -11,7 +11,7 @@ apenas vi como eram as imagens e as cores e fiz.
 
 ## Deploy do projeto:
 
-<https://andyrodrigo.github.io/Jogo-da-Velha/>
+<https://pedro-sousam.github.io/Jogo-da-Velha-Animado/>
 
 <img src="/imagens/JogoDaVelha.jpg"/>
 
