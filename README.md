@@ -1,7 +1,7 @@
 # Jogo-da-Velha
 
 ## Sobre o Projeto:
-
+>Esse projeto não é meu, só adicionei animações e uma transição, o projeto original se encontra no repositório: <br> <https://github.com/andyrodrigo/Jogo-da-Velha> <br> 
 > Este projeto é um Jogo da Velha no Navegador feito com um layout moderno. A ideia do layout vem do site
 [Frontend Mentor](https://www.frontendmentor.io/challenges/tic-tac-toe-game-Re7ZF_E2v), onde existe este desafio.
 Por ser um desafio para usuários premium, não tive acesso aos *assets* que normalmente o site disponibiliza ao usuário para iniciar o projeto,
@@ -11,7 +11,7 @@ apenas vi como eram as imagens e as cores e fiz.
 
 ## Deploy do projeto:
 
-<https://andyrodrigo.github.io/Jogo-da-Velha/>
+<https://pedro-sousam.github.io/Jogo-da-Velha-Animado/>
 
 <img src="/imagens/JogoDaVelha.jpg"/>
 

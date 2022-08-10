@@ -1,6 +1,3 @@
-//Funções das Telas-------------------------------------------------------------------------------
-
-//Usada para verificar o simbolo escolhido pelo jogador
 function mudaSimbolo( simbolo ){
     if( simbolo == 'X' && simboloJogador != "X"){
         simboloJogador = "X"
@@ -114,26 +111,24 @@ function inserirXO( linha, coluna){
 
             let simbolo
             let jogadorAtual = jogador;
-    
             if(jogadorAtual == 1){
-                espaco[linha][coluna].style.backgroundImage = 'url("imagens/Xx.png")';
                 retirar(linha,coluna)
                 simbolo = 'X'
                 jogador = 2;
                 turno.removeChild(simbX);
-                turno.appendChild(simbO);
+                turno.appendChild(simbO); 
+                espaco[linha][coluna].innerHTML = '<span>'+simbolo+ '</span>' + ' <svg width="100" height="100" viewBox="0 0 500 500" fill="none" class="rotateX" xmlns="http://www.w3.org/2000/svg"> <g id="Frame 2" clip-path="url(#clip0_7_23)"> <rect width="500" height="500" fill="transparent"/> <path class="X" d="M291 199V1H243.5H196V199H1V297H196V499H291V297H498V199H291Z" stroke="#00C5BF" stroke-width="5"/> <g id="Frame"> <path class="X1" d="M244 1V499" stroke="#00C5BF" stroke-width="100"/> <path class="X1" d="M2 250H497" stroke="#00C5BF" stroke-width="100"/> </g> </g> <defs> <clipPath id="clip0_7_23"> <rect width="500" height="500" fill="white"/> </clipPath> </defs> </svg>'
+                console.log(espaco[linha][coluna].innerText)
             }else{
-                espaco[linha][coluna].style.backgroundImage = 'url("imagens/Oo.png")';
                 retirar(linha,coluna)
                 simbolo = 'O' 
                 jogador = 1;
                 turno.removeChild(simbO);
-                turno.appendChild(simbX);
+                turno.appendChild(simbX); 
+                espaco[linha][coluna].innerHTML = `<span>${simbolo}</span> <svg width="100" height="100" viewBox="0 0 484 480" fill="none" class="rotateX" xmlns="http://www.w3.org/2000/svg"> <g id="Frame 2"> <path class="O1" d="M429.105 235.119C431.065 338.47 348.818 423.888 245.345 425.85C141.872 427.812 56.4469 345.572 54.4875 242.221C52.5281 138.87 134.774 53.4516 238.248 51.4899C341.721 49.5282 427.146 131.768 429.105 235.119Z" stroke="#F0B239" stroke-width="100"/> <circle class="O" cx="244" cy="239" r="233" stroke="#F0B239" stroke-width="4"/> <circle class="O" cx="242" cy="239" r="138" stroke="#F0B239" stroke-width="4"/> </g> </svg>`
             }
             simbolos += 1;
             registraJogadas( linha, coluna )
-            espaco[linha][coluna].innerText = simbolo
-
             testarVitoria(simbolo, jogadorAtual)
 
             //testaEmpate
@@ -180,7 +175,7 @@ function testarVitoria(simbolo, jogadorAtual){
     let contadorDS = 0 //conta diagonal subindo
 
     for(let i=0 ; i<3; i++){
-        for(let j=0 ; j<3; j++){
+        for(let j=0 ; j<3; j++){ 
             if(espaco[i][j].innerText == simbolo){//testa linha
                 contadorL++
             }
@@ -343,4 +338,3 @@ function voltar(){
     telaVitoria.style.display = 'none';
     telaInicial.style.display = 'block';
 }
-
